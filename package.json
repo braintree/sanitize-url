@@ -1,8 +1,9 @@
 {
   "name": "@braintree/sanitize-url",
   "version": "1.0.0",
-  "description": "",
+  "description": "A url sanitizer",
   "main": "index.js",
+  "author": "Braintree <code@getbraintree.com>",
   "scripts": {
     "test": "mocha"
   },
