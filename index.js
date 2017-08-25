@@ -1,7 +1,7 @@
 'use strict';
 
-var jsRegex = /^javascript:.*/im;
-var dataRegex = /^data:.*/im;
+var jsRegex = /^(%20)*javascript:.*/im;
+var dataRegex = /^(%20)*data:.*/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 
 function sanitizeUrl(url) {

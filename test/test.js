@@ -16,8 +16,16 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl(decodeURIComponent('JaVaScRiP%0at:alert(document.domain)'))).to.equal('about:blank');
   });
 
+  it('replaces javascript urls with about:blank when javascript url begins with %20', function () {
+    expect(sanitizeUrl('%20%20%20%20javascript:alert(document.domain)')).to.equal('about:blank');
+  });
+
   it('replaces data urls with about:blank', function () {
     expect(sanitizeUrl('data:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E')).to.equal('about:blank');
+  });
+
+  it('replaces data urls with about:blank when data url begins with %20', function () {
+    expect(sanitizeUrl('%20%20%20%20data:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E')).to.equal('about:blank');
   });
 
   it('disregards capitalization for data urls', function () {
