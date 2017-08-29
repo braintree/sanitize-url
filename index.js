@@ -1,6 +1,6 @@
 'use strict';
 
-var invalidPrototcolRegex = /^(%20)*(javascript|data)/im;
+var invalidPrototcolRegex = /^(%20|\s)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
 
