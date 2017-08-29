@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-## Unreleased
+## 2.0.1
 * Sanitize malicious URLs that begin with %20
 
 ## 2.0.0
