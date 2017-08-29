@@ -20,6 +20,10 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('%20%20%20%20javascript:alert(document.domain)')).to.equal('about:blank');
   });
 
+  it('does not replace javascript: if it is not in the scheme of the URL', function () {
+    expect(sanitizeUrl('http://example.com#myjavascript:foo')).to.equal('http://example.com#myjavascript:foo');
+  });
+
   it('replaces data urls with about:blank', function () {
     expect(sanitizeUrl('data:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E')).to.equal('about:blank');
   });
@@ -34,5 +38,17 @@ describe('sanitizeUrl', function () {
 
   it('ignores ctrl characters in data urls', function () {
     expect(sanitizeUrl(decodeURIComponent('dat%0aa:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E'))).to.equal('about:blank');
+  });
+
+  it('does not alter http URLs', function () {
+    expect(sanitizeUrl('http://example.com')).to.equal('http://example.com');
+  });
+
+  it('does not alter https URLs', function () {
+    expect(sanitizeUrl('https://example.com')).to.equal('https://example.com');
+  });
+
+  it('does not alter deep-link URLs', function () {
+    expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
 });
