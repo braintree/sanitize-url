@@ -16,8 +16,20 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl(decodeURIComponent('JaVaScRiP%0at:alert(document.domain)'))).to.equal('about:blank');
   });
 
+  it('replaces javascript urls with about:blank when javascript url begins with %20', function () {
+    expect(sanitizeUrl('%20%20%20%20javascript:alert(document.domain)')).to.equal('about:blank');
+  });
+
+  it('does not replace javascript: if it is not in the scheme of the URL', function () {
+    expect(sanitizeUrl('http://example.com#myjavascript:foo')).to.equal('http://example.com#myjavascript:foo');
+  });
+
   it('replaces data urls with about:blank', function () {
     expect(sanitizeUrl('data:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E')).to.equal('about:blank');
+  });
+
+  it('replaces data urls with about:blank when data url begins with %20', function () {
+    expect(sanitizeUrl('%20%20%20%20data:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E')).to.equal('about:blank');
   });
 
   it('disregards capitalization for data urls', function () {
@@ -26,5 +38,25 @@ describe('sanitizeUrl', function () {
 
   it('ignores ctrl characters in data urls', function () {
     expect(sanitizeUrl(decodeURIComponent('dat%0aa:text/html;basfe64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E'))).to.equal('about:blank');
+  });
+
+  it('does not alter http URLs', function () {
+    expect(sanitizeUrl('http://example.com/path/to:something')).to.equal('http://example.com/path/to:something');
+  });
+
+  it('does not alter http URLs with ports', function () {
+    expect(sanitizeUrl('http://example.com:4567/path/to:something')).to.equal('http://example.com:4567/path/to:something');
+  });
+
+  it('does not alter https URLs', function () {
+    expect(sanitizeUrl('https://example.com')).to.equal('https://example.com');
+  });
+
+  it('does not alter https URLs with ports', function () {
+    expect(sanitizeUrl('https://example.com:4567/path/to:something')).to.equal('https://example.com:4567/path/to:something');
+  });
+
+  it('does not alter deep-link urls', function () {
+    expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
 });

@@ -1,15 +1,25 @@
 'use strict';
 
-var jsRegex = /^javascript:.*/im;
-var dataRegex = /^data:.*/im;
+var invalidPrototcolRegex = /^(%20)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
+var urlSchemeRegex = /^([^:]+):/gm;
 
 function sanitizeUrl(url) {
+  var urlScheme;
   var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
+  var urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
 
-  return sanitizedUrl
-    .replace(jsRegex, 'about:blank')
-    .replace(dataRegex, 'about:blank');
+  if (!urlSchemeParseResults) {
+    return 'about:blank';
+  }
+
+  urlScheme = urlSchemeParseResults[0];
+
+  if (invalidPrototcolRegex.test(urlScheme)) {
+    return 'about:blank';
+  }
+
+  return sanitizedUrl;
 }
 
 module.exports = {
