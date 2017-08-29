@@ -41,14 +41,22 @@ describe('sanitizeUrl', function () {
   });
 
   it('does not alter http URLs', function () {
-    expect(sanitizeUrl('http://example.com')).to.equal('http://example.com');
+    expect(sanitizeUrl('http://example.com/path/to:something')).to.equal('http://example.com/path/to:something');
+  });
+
+  it('does not alter http URLs with ports', function () {
+    expect(sanitizeUrl('http://example.com:4567/path/to:something')).to.equal('http://example.com:4567/path/to:something');
   });
 
   it('does not alter https URLs', function () {
     expect(sanitizeUrl('https://example.com')).to.equal('https://example.com');
   });
 
-  it('does not alter deep-link URLs', function () {
+  it('does not alter https URLs with ports', function () {
+    expect(sanitizeUrl('https://example.com:4567/path/to:something')).to.equal('https://example.com:4567/path/to:something');
+  });
+
+  it('does not alter deep-link urls', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
 });

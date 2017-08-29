@@ -2,7 +2,7 @@
 
 var invalidPrototcolRegex = /^(%20)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
-var urlSchemeRegex = /^(.+):/gm;
+var urlSchemeRegex = /^([^:]+):/gm;
 
 function sanitizeUrl(url) {
   var urlScheme;
