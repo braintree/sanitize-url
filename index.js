@@ -3,7 +3,7 @@
 var invalidPrototcolRegex = /^(%20|\s)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
-var relativeFirstCharacters = [".", "/"]
+var relativeFirstCharacters = ['.', '/']
 
 function sanitizeUrl(url) {
   var urlScheme;
