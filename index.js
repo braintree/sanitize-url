@@ -5,12 +5,21 @@ var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
 var relativeFirstCharacters = ['.', '/']
 
-function sanitizeUrl(url) {
-  var urlScheme;
-  var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
-  var urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex) || [];
+function isRelativeUrl(url) {
+  return relativeFirstCharacters.indexOf(url[0]) > -1;
+}
 
-  if (!urlSchemeParseResults.length && relativeFirstCharacters.indexOf(url[0]) === -1) {
+function sanitizeUrl(url) {
+  var urlScheme, urlSchemeParseResults;
+  var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
+  
+  if (isRelativeUrl(sanitizedUrl)) {
+    return sanitizedUrl;
+  }
+  
+  urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
+
+  if (!urlSchemeParseResults) {
     return 'about:blank';
   }
 
