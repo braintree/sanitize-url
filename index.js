@@ -3,13 +3,14 @@
 var invalidPrototcolRegex = /^(%20|\s)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
+var relativeFirstCharacters = [".", "/"]
 
 function sanitizeUrl(url) {
   var urlScheme;
   var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
   var urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex) || [];
 
-  if (!urlSchemeParseResults.length && url[0] !== "/") {
+  if (!urlSchemeParseResults.length && relativeFirstCharacters.indexOf(url[0]) === -1) {
     return 'about:blank';
   }
 
