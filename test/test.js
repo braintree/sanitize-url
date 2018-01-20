@@ -64,6 +64,10 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('https://example.com:4567/path/to:something')).to.equal('https://example.com:4567/path/to:something');
   });
 
+  it('does not alter root-relative URLs', function () {
+    expect(sanitizeUrl('/path/to/my.json')).to.equal('/path/to/my.json');
+  });
+
   it('does not alter deep-link urls', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });

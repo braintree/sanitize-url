@@ -7,9 +7,9 @@ var urlSchemeRegex = /^([^:]+):/gm;
 function sanitizeUrl(url) {
   var urlScheme;
   var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
-  var urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
+  var urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex) || [];
 
-  if (!urlSchemeParseResults) {
+  if (!urlSchemeParseResults.length && url[0] !== "/") {
     return 'about:blank';
   }
 
