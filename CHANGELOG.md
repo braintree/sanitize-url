@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+## 2.1.0
+* Allow relative urls to be sanitized
+
 ## 2.0.2
 * Sanitize malicious URLs that begin with `\s`
 
