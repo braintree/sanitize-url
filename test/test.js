@@ -64,6 +64,18 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('https://example.com:4567/path/to:something')).to.equal('https://example.com:4567/path/to:something');
   });
 
+  it('does not alter relative-path reference URLs', function () {
+    expect(sanitizeUrl('./path/to/my.json')).to.equal('./path/to/my.json');
+  });
+
+  it('does not alter absolute-path reference URLs', function () {
+    expect(sanitizeUrl('/path/to/my.json')).to.equal('/path/to/my.json');
+  });
+
+  it('does not alter network-path relative URLs', function () {
+    expect(sanitizeUrl('//google.com/robots.txt')).to.equal('//google.com/robots.txt');
+  });
+
   it('does not alter deep-link urls', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });

@@ -3,11 +3,21 @@
 var invalidPrototcolRegex = /^(%20|\s)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
+var relativeFirstCharacters = ['.', '/']
+
+function isRelativeUrl(url) {
+  return relativeFirstCharacters.indexOf(url[0]) > -1;
+}
 
 function sanitizeUrl(url) {
-  var urlScheme;
+  var urlScheme, urlSchemeParseResults;
   var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
-  var urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
+  
+  if (isRelativeUrl(sanitizedUrl)) {
+    return sanitizedUrl;
+  }
+  
+  urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
 
   if (!urlSchemeParseResults) {
     return 'about:blank';
