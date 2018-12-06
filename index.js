@@ -32,6 +32,8 @@ function sanitizeUrl(url) {
   return sanitizedUrl;
 }
 
-module.exports = {
-  sanitizeUrl: sanitizeUrl
-};
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = {
+    sanitizeUrl: sanitizeUrl
+  };
+}
