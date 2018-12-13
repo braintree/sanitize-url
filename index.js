@@ -10,7 +10,7 @@ function isRelativeUrl(url) {
 }
 
 function sanitizeUrl(url) {
-  if(!url) {
+  if (!url) {
     return 'about:blank';
   }
 
