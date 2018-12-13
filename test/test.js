@@ -79,4 +79,13 @@ describe('sanitizeUrl', function () {
   it('does not alter deep-link urls', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
+
+  it('should reject blank urls', function() {
+    expect(sanitizeUrl('')).to.equal('about:blank');
+  });
+
+  it('should reject null strings', function() {
+    expect(sanitizeUrl(null)).to.equal('about:blank');
+  });
+
 });
