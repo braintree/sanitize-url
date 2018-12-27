@@ -80,12 +80,11 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
 
-  it('should reject blank urls', function () {
+  it('replaces blank urls with about:blank', function () {
     expect(sanitizeUrl('')).to.equal('about:blank');
   });
 
-  it('should reject null strings', function () {
+  it('replaces null values with about:blank', function () {
     expect(sanitizeUrl(null)).to.equal('about:blank');
   });
-
 });
