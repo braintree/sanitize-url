@@ -10,6 +10,10 @@ function isRelativeUrl(url) {
 }
 
 function sanitizeUrl(url) {
+  if (!url) {
+    return 'about:blank';
+  }
+
   var urlScheme, urlSchemeParseResults;
   var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
   
