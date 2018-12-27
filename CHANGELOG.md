@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+## 3.0.0
+
+_breaking changes_
+
+* Replace blank strings with about:blank
+* Replace null values with about:blank
+
 ## 2.1.0
 * Allow relative urls to be sanitized
 
