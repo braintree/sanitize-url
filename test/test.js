@@ -84,7 +84,17 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('')).to.equal('about:blank');
   });
 
-  it('replaces null values with about:blank', function () {
-    expect(sanitizeUrl(null)).to.equal('about:blank');
+  it('throws when url is undefined', function() {
+      var _url; // _url = undefined
+      expect(function() {
+          sanitizeUrl(_url)
+      }).to.throw();
+  })
+
+  it('throws when url is a null value', function() {
+    var _url = null;
+    expect(function() {
+      sanitizeUrl(_url)
+    }).to.throw();
   });
 });

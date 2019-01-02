@@ -11,7 +11,10 @@ function isRelativeUrl(url) {
 
 function sanitizeUrl(url) {
   if (!url) {
-    return 'about:blank';
+    if (url === null || url === undefined)
+      throw new Error("Invalid String: url value is 'null' or 'undefined'");
+    else
+      return 'about:blank';
   }
 
   var urlScheme, urlSchemeParseResults;
