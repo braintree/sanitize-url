@@ -80,6 +80,10 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
 
+  it('does not alter mailto urls', function () {
+      expect(sanitizeUrl('mailto:test@example.com?subject=hello+world')).to.equal('mailto:test@example.com?subject=hello+world');
+  });
+
   it('replaces blank urls with about:blank', function () {
     expect(sanitizeUrl('')).to.equal('about:blank');
   });
