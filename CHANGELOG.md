@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-## unreleased
+## 3.1.0
 * Trim whitespace from urls
 
 ## 3.0.0
