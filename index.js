@@ -15,12 +15,12 @@ function sanitizeUrl(url) {
   }
 
   var urlScheme, urlSchemeParseResults;
-  var sanitizedUrl = url.replace(ctrlCharactersRegex, '');
-  
+  var sanitizedUrl = url.replace(ctrlCharactersRegex, '').trim();
+
   if (isRelativeUrl(sanitizedUrl)) {
     return sanitizedUrl;
   }
-  
+
   urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
 
   if (!urlSchemeParseResults) {

@@ -91,4 +91,8 @@ describe('sanitizeUrl', function () {
   it('replaces null values with about:blank', function () {
     expect(sanitizeUrl(null)).to.equal('about:blank');
   });
+
+  it('removes whitespace from urls', function () {
+    expect(sanitizeUrl('   http://example.com/path/to:something    ')).to.equal('http://example.com/path/to:something');
+  });
 });
