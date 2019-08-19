@@ -5,7 +5,7 @@ var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
 var relativeFirstCharacters = ['.', '/']
 
-function isRelativeUrl(url) {
+function isUrlWithoutProtocol(url) {
   return relativeFirstCharacters.indexOf(url[0]) > -1;
 }
 
@@ -17,7 +17,7 @@ function sanitizeUrl(url) {
   var urlScheme, urlSchemeParseResults;
   var sanitizedUrl = url.replace(ctrlCharactersRegex, '').trim();
 
-  if (isRelativeUrl(sanitizedUrl)) {
+  if (isUrlWithoutProtocol(sanitizedUrl)) {
     return sanitizedUrl;
   }
 
