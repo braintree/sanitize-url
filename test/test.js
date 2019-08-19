@@ -72,7 +72,7 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('/path/to/my.json')).to.equal('/path/to/my.json');
   });
 
-  it('does not alter network-path relative URLs', function () {
+  it('does not alter protocol-less network-path URLs', function () {
     expect(sanitizeUrl('//google.com/robots.txt')).to.equal('//google.com/robots.txt');
   });
 
