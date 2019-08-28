@@ -5,11 +5,11 @@ var sanitizeUrl = require('../').sanitizeUrl;
 
 describe('sanitizeUrl', function () {
   it('replaces javascript urls with about:blank', function () {
-    expect(sanitizeUrl('javascript:alert(document.domain)')).to.equal('about:blank');
+    expect(sanitizeUrl('javascript:alert(document.domain)')).to.equal('about:blank'); // eslint-disable-line no-script-url
   });
 
   it('disregards capitalization for JavaScript urls', function () {
-    expect(sanitizeUrl('jAvasCrIPT:alert(document.domain)')).to.equal('about:blank');
+    expect(sanitizeUrl('jAvasCrIPT:alert(document.domain)')).to.equal('about:blank'); // eslint-disable-line no-script-url
   });
 
   it('ignores ctrl characters in javascript urls', function () {
@@ -81,7 +81,7 @@ describe('sanitizeUrl', function () {
   });
 
   it('does not alter mailto urls', function () {
-      expect(sanitizeUrl('mailto:test@example.com?subject=hello+world')).to.equal('mailto:test@example.com?subject=hello+world');
+    expect(sanitizeUrl('mailto:test@example.com?subject=hello+world')).to.equal('mailto:test@example.com?subject=hello+world');
   });
 
   it('replaces blank urls with about:blank', function () {

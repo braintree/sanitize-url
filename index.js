@@ -3,19 +3,20 @@
 var invalidPrototcolRegex = /^(%20|\s)*(javascript|data)/im;
 var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
-var relativeFirstCharacters = ['.', '/']
+var relativeFirstCharacters = ['.', '/'];
 
 function isUrlWithoutProtocol(url) {
   return relativeFirstCharacters.indexOf(url[0]) > -1;
 }
 
 function sanitizeUrl(url) {
+  var urlScheme, urlSchemeParseResults, sanitizedUrl;
+
   if (!url) {
     return 'about:blank';
   }
 
-  var urlScheme, urlSchemeParseResults;
-  var sanitizedUrl = url.replace(ctrlCharactersRegex, '').trim();
+  sanitizedUrl = url.replace(ctrlCharactersRegex, '').trim();
 
   if (isUrlWithoutProtocol(sanitizedUrl)) {
     return sanitizedUrl;

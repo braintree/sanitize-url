@@ -1,0 +1,6 @@
+---
+  extends: braintree/server
+  env:
+    mocha: true
+  globals:
+    expect: true
