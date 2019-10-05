@@ -76,6 +76,10 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('//google.com/robots.txt')).to.equal('//google.com/robots.txt');
   });
 
+  it('does not alter protocol-less URLs', function () {
+    expect(sanitizeUrl('www.google.com')).to.equal('www.google.com');
+  });
+
   it('does not alter deep-link urls', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });

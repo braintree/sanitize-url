@@ -25,7 +25,7 @@ function sanitizeUrl(url) {
   urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
 
   if (!urlSchemeParseResults) {
-    return 'about:blank';
+    return sanitizedUrl;
   }
 
   urlScheme = urlSchemeParseResults[0];
