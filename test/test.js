@@ -77,7 +77,7 @@ describe('sanitizeUrl', function () {
   });
 
   it('does not alter protocol-less URLs', function () {
-    expect(sanitizeUrl('www.google.com')).to.equal('www.google.com');
+    expect(sanitizeUrl('www.example.com')).to.equal('www.example.com');
   });
 
   it('does not alter deep-link urls', function () {
