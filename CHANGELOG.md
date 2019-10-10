@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+## unreleased
+
+_Breaking Changes_
+* Protocol-less urls (ie: www.example.com) will be sanitised and passed on instead of sending out `about:blank` (Thanks @chawes13 #18)
+
 ## 3.1.0
 * Trim whitespace from urls
 
