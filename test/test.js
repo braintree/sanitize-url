@@ -76,6 +76,10 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('//google.com/robots.txt')).to.equal('//google.com/robots.txt');
   });
 
+  it('does not alter protocol-less URLs', function () {
+    expect(sanitizeUrl('www.example.com')).to.equal('www.example.com');
+  });
+
   it('does not alter deep-link urls', function () {
     expect(sanitizeUrl('com.braintreepayments.demo://example')).to.equal('com.braintreepayments.demo://example');
   });
@@ -90,6 +94,10 @@ describe('sanitizeUrl', function () {
 
   it('replaces null values with about:blank', function () {
     expect(sanitizeUrl(null)).to.equal('about:blank');
+  });
+
+  it('replaces undefined values with about:blank', function () {
+    expect(sanitizeUrl()).to.equal('about:blank');
   });
 
   it('removes whitespace from urls', function () {

@@ -5,7 +5,7 @@ var ctrlCharactersRegex = /[^\x20-\x7E]/gmi;
 var urlSchemeRegex = /^([^:]+):/gm;
 var relativeFirstCharacters = ['.', '/'];
 
-function isUrlWithoutProtocol(url) {
+function isRelativeUrlWithoutProtocol(url) {
   return relativeFirstCharacters.indexOf(url[0]) > -1;
 }
 
@@ -18,14 +18,14 @@ function sanitizeUrl(url) {
 
   sanitizedUrl = url.replace(ctrlCharactersRegex, '').trim();
 
-  if (isUrlWithoutProtocol(sanitizedUrl)) {
+  if (isRelativeUrlWithoutProtocol(sanitizedUrl)) {
     return sanitizedUrl;
   }
 
   urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
 
   if (!urlSchemeParseResults) {
-    return 'about:blank';
+    return sanitizedUrl;
   }
 
   urlScheme = urlSchemeParseResults[0];
