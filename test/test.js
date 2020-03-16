@@ -89,7 +89,7 @@ describe('sanitizeUrl', function () {
   });
 
   it('does not alter urls with accented characters', function () {
-    expect(sanitizeUrl('www.example.com/with-áccents')).to.equal('www.example.com/with-áccents');
+    expect(sanitizeUrl('www.example.com/with-áccêntš')).to.equal('www.example.com/with-áccêntš');
   });
 
   it('replaces blank urls with about:blank', function () {
