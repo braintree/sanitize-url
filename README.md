@@ -20,3 +20,9 @@ sanitizeUrl('javascript:alert(document.domain)'); // 'about:blank'
 sanitizeUrl('jAvasCrIPT:alert(document.domain)'); // 'about:blank'
 sanitizeUrl(decodeURIComponent('JaVaScRiP%0at:alert(document.domain)')); // 'about:blank'
 ```
+
+## TypeScript typings
+
+```sh
+npm install -D @types/braintree__sanitize-url
+```
