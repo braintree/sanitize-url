@@ -3,11 +3,12 @@
   "version": "4.0.1",
   "description": "A url sanitizer",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": "",
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "prettier --write .",
-    "build": "tsc",
+    "build": "tsc --declaration",
     "lint": "eslint --ext js,ts .",
     "posttest": "npm run lint",
     "test": "jest"
