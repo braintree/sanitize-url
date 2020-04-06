@@ -88,6 +88,10 @@ describe('sanitizeUrl', function () {
     expect(sanitizeUrl('mailto:test@example.com?subject=hello+world')).to.equal('mailto:test@example.com?subject=hello+world');
   });
 
+  it('does not alter urls with accented characters', function () {
+    expect(sanitizeUrl('www.example.com/with-áccêntš')).to.equal('www.example.com/with-áccêntš');
+  });
+
   it('replaces blank urls with about:blank', function () {
     expect(sanitizeUrl('')).to.equal('about:blank');
   });
