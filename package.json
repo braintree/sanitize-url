@@ -1,6 +1,6 @@
 {
   "name": "@braintree/sanitize-url",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A url sanitizer",
   "main": "index.js",
   "author": "",
