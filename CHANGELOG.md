@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## 4.0.1
+
+* Fix issue where urls with accented characters were incorrectly sanitized
+
 ## 4.0.0
 
 _Breaking Changes_
