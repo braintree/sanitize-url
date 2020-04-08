@@ -1,5 +1,6 @@
 # unreleased
-* Add typescript types
+
+- Add typescript types
 
 # CHANGELOG
 
