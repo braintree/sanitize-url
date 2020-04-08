@@ -1,3 +1,6 @@
+# unreleased
+* Add typescript types
+
 # CHANGELOG
 
 ## 4.0.1
