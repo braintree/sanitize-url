@@ -1,4 +1,4 @@
-const invalidPrototcolRegex = /^(%20|\s)*(javascript|data)/im;
+const invalidProtocolRegex = /^(%20|\s)*(javascript|data)/im;
 const ctrlCharactersRegex = /[^\x20-\x7EÀ-ž]/gim;
 const urlSchemeRegex = /^([^:]+):/gm;
 const relativeFirstCharacters = [".", "/"];
@@ -26,7 +26,7 @@ export function sanitizeUrl(url?: string): string {
 
   const urlScheme = urlSchemeParseResults[0];
 
-  if (invalidPrototcolRegex.test(urlScheme)) {
+  if (invalidProtocolRegex.test(urlScheme)) {
     return "about:blank";
   }
 
