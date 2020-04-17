@@ -3,11 +3,15 @@
   "version": "4.0.1",
   "description": "A url sanitizer",
   "main": "index.js",
+  "types": "index.d.ts",
   "author": "",
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "mocha"
+    "prepublishOnly": "npm run build",
+    "prebuild": "prettier --write .",
+    "build": "tsc --declaration",
+    "lint": "eslint --ext js,ts .",
+    "posttest": "npm run lint",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,9 +24,21 @@
   },
   "homepage": "https://github.com/braintree/sanitize-url#readme",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "chai": "^4.1.0",
     "eslint": "^6.2.2",
-    "eslint-config-braintree": "^4.0.0",
-    "mocha": "^6.2.0"
+    "eslint-config-braintree": "^5.0.0-typescript-prep-rc.17",
+    "jest": "^25.3.0",
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "src/__tests__/tsconfig.json"
+      }
+    }
   }
 }
