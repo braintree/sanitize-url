@@ -1,3 +1,7 @@
+# 4.1.1
+
+- Fixup path to type declaration (closes #25)
+
 # 4.1.0
 
 - Add typescript types
