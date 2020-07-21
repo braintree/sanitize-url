@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/braintree/sanitize-url#readme",
   "devDependencies": {
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.5",
     "chai": "^4.1.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "eslint-config-braintree": "^5.0.0-typescript-prep-rc.17",
     "jest": "^26.1.0",
     "prettier": "^2.0.5",
