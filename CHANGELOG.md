@@ -1,3 +1,7 @@
+# 5.0.0
+
+- Sanitize vbscript urls (thanks @vicnicius)
+
 # 4.1.1
 
 - Fixup path to type declaration (closes #25)
