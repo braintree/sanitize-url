@@ -80,6 +80,36 @@ describe("sanitizeUrl", () => {
     ).toBe("about:blank");
   });
 
+  it("replaces VBscript urls with about:blank", () => {
+    expect(sanitizeUrl("vbscript:msgbox('XSS')")).toBe("about:blank");
+  });
+
+  it("disregards capitalization for VBscript urls", () => {
+    expect(sanitizeUrl("vbScrIpT:mSGBOX('XSS')")).toBe("about:blank");
+  });
+
+  it("ignores ctrl characters in VBscript urls", () => {
+    expect(sanitizeUrl(decodeURIComponent("VbScRiP%0at:msgbox('XSS')"))).toBe(
+      "about:blank"
+    );
+  });
+
+  it("replaces VBscript urls with about:blank when VBscript url begins with %20", () => {
+    expect(sanitizeUrl("%20%20%20%20vbscript:msgbox('XSS')")).toBe(
+      "about:blank"
+    );
+  });
+
+  it("replaces VBScript urls with about:blank when VBscript url begins with s", () => {
+    expect(sanitizeUrl("    vbscript:msgbox('XSS')")).toBe("about:blank");
+  });
+
+  it("does not replace VBscript: if it is not in the scheme of the URL", () => {
+    expect(sanitizeUrl("http://example.com#whatisvbscript:foo")).toBe(
+      "http://example.com#whatisvbscript:foo"
+    );
+  });
+
   it("does not alter http URLs", () => {
     expect(sanitizeUrl("http://example.com/path/to:something")).toBe(
       "http://example.com/path/to:something"
