@@ -1,5 +1,7 @@
 # 5.0.0
 
+_Breaking Changes_
+
 - Sanitize vbscript urls (thanks @vicnicius)
 
 # 4.1.1
