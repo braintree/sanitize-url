@@ -168,6 +168,18 @@ describe("sanitizeUrl", () => {
     );
   });
 
+  it("does not strip harmless unicode characters", () => {
+    expect(sanitizeUrl("www.example.com/лот.рфшишкиü–")).toBe(
+      "www.example.com/лот.рфшишкиü–"
+    );
+  });
+
+  it("should strip out control chars", () => {
+    expect(sanitizeUrl("www.example.com/\u0000\u001F\x00\x1F")).toBe(
+      "www.example.com/"
+    );
+  });
+
   it("replaces blank urls with about:blank", () => {
     expect(sanitizeUrl("")).toBe("about:blank");
   });

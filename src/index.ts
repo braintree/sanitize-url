@@ -1,5 +1,5 @@
 const invalidProtocolRegex = /^(%20|\s)*(javascript|data|vbscript)/im;
-const ctrlCharactersRegex = /[^\x20-\x7EÀ-ž]/gim;
+const ctrlCharactersRegex = /[\u0000-\u001F\u007F-\u009F]/gim;
 const urlSchemeRegex = /^([^:]+):/gm;
 const relativeFirstCharacters = [".", "/"];
 
