@@ -1,3 +1,7 @@
+# 5.0.1
+
+- Fix issue where certain safe characters were being filtered out (#31 thanks @akirchmyer)
+
 # 5.0.0
 
 _Breaking Changes_
