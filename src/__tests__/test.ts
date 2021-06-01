@@ -2,161 +2,53 @@
 import { sanitizeUrl } from "..";
 
 describe("sanitizeUrl", () => {
-  it("replaces javascript urls with about:blank", () => {
-    expect(sanitizeUrl("javascript:alert(document.domain)")).toBe(
-      "about:blank"
-    );
-  });
-
-  it("disregards capitalization for JavaScript urls", () => {
-    expect(sanitizeUrl("jAvasCrIPT:alert(document.domain)")).toBe(
-      "about:blank"
-    );
-  });
-
-  it("ignores ctrl characters in javascript urls", () => {
-    expect(
-      sanitizeUrl(decodeURIComponent("JaVaScRiP%0at:alert(document.domain)"))
-    ).toBe("about:blank");
-  });
-
-  it("replaces javascript urls with about:blank when javascript url begins with %20", () => {
-    expect(sanitizeUrl("%20%20%20%20javascript:alert(document.domain)")).toBe(
-      "about:blank"
-    );
-  });
-
-  it("replaces javascript urls with about:blank when javascript url begins with s", () => {
-    expect(sanitizeUrl("    javascript:alert(document.domain)")).toBe(
-      "about:blank"
-    );
-  });
-
-  it("does not replace javascript: if it is not in the scheme of the URL", () => {
-    expect(sanitizeUrl("http://example.com#myjavascript:foo")).toBe(
-      "http://example.com#myjavascript:foo"
-    );
-  });
-
-  it("replaces data urls with about:blank", () => {
-    expect(
-      sanitizeUrl(
-        "data:text/html;base64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E"
-      )
-    ).toBe("about:blank");
-  });
-
-  it("replaces data urls with about:blank when data url begins with %20", () => {
-    expect(
-      sanitizeUrl(
-        "%20%20%20%20data:text/html;base64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E"
-      )
-    ).toBe("about:blank");
-  });
-
-  it("replaces data urls with about:blank when data url begins with s", () => {
-    expect(
-      sanitizeUrl(
-        "    data:text/html;base64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E"
-      )
-    ).toBe("about:blank");
-  });
-
-  it("disregards capitalization for data urls", () => {
-    expect(
-      sanitizeUrl(
-        "dAtA:text/html;base64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E"
-      )
-    ).toBe("about:blank");
-  });
-
-  it("ignores ctrl characters in data urls", () => {
-    expect(
-      sanitizeUrl(
-        decodeURIComponent(
-          "dat%0aa:text/html;base64,PH%3Cscript%3Ealert(document.domain)%3C/script%3E"
-        )
-      )
-    ).toBe("about:blank");
-  });
-
-  it("replaces VBscript urls with about:blank", () => {
-    expect(sanitizeUrl("vbscript:msgbox('XSS')")).toBe("about:blank");
-  });
-
-  it("disregards capitalization for VBscript urls", () => {
-    expect(sanitizeUrl("vbScrIpT:mSGBOX('XSS')")).toBe("about:blank");
-  });
-
-  it("ignores ctrl characters in VBscript urls", () => {
-    expect(sanitizeUrl(decodeURIComponent("VbScRiP%0at:msgbox('XSS')"))).toBe(
-      "about:blank"
-    );
-  });
-
-  it("replaces VBscript urls with about:blank when VBscript url begins with %20", () => {
-    expect(sanitizeUrl("%20%20%20%20vbscript:msgbox('XSS')")).toBe(
-      "about:blank"
-    );
-  });
-
-  it("replaces VBScript urls with about:blank when VBscript url begins with s", () => {
-    expect(sanitizeUrl("    vbscript:msgbox('XSS')")).toBe("about:blank");
-  });
-
-  it("does not replace VBscript: if it is not in the scheme of the URL", () => {
-    expect(sanitizeUrl("http://example.com#whatisvbscript:foo")).toBe(
-      "http://example.com#whatisvbscript:foo"
-    );
-  });
-
-  it("does not alter http URLs", () => {
+  it("does not alter http URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com/path/to:something")).toBe(
       "http://example.com/path/to:something"
     );
   });
 
-  it("does not alter http URLs with ports", () => {
+  it("does not alter http URLs with ports with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com:4567/path/to:something")).toBe(
       "http://example.com:4567/path/to:something"
     );
   });
 
-  it("does not alter https URLs", () => {
+  it("does not alter https URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("https://example.com")).toBe("https://example.com");
   });
 
-  it("does not alter https URLs with ports", () => {
+  it("does not alter https URLs with ports with alphanumeric characters", () => {
     expect(sanitizeUrl("https://example.com:4567/path/to:something")).toBe(
       "https://example.com:4567/path/to:something"
     );
   });
 
-  it("does not alter relative-path reference URLs", () => {
+  it("does not alter relative-path reference URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("./path/to/my.json")).toBe("./path/to/my.json");
   });
 
-  it("does not alter absolute-path reference URLs", () => {
+  it("does not alter absolute-path reference URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("/path/to/my.json")).toBe("/path/to/my.json");
   });
 
-  it("does not alter protocol-less network-path URLs", () => {
+  it("does not alter protocol-less network-path URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("//google.com/robots.txt")).toBe(
       "//google.com/robots.txt"
     );
   });
 
-  it("does not alter protocol-less URLs", () => {
+  it("does not alter protocol-less URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("www.example.com")).toBe("www.example.com");
   });
 
-  it("does not alter deep-link urls", () => {
+  it("does not alter deep-link urls with alphanumeric characters", () => {
     expect(sanitizeUrl("com.braintreepayments.demo://example")).toBe(
       "com.braintreepayments.demo://example"
     );
   });
 
-  it("does not alter mailto urls", () => {
+  it("does not alter mailto urls with alphanumeric characters", () => {
     expect(sanitizeUrl("mailto:test@example.com?subject=hello+world")).toBe(
       "mailto:test@example.com?subject=hello+world"
     );
@@ -174,10 +66,10 @@ describe("sanitizeUrl", () => {
     );
   });
 
-  it("should strip out control chars", () => {
-    expect(sanitizeUrl("www.example.com/\u0000\u001F\x00\x1F")).toBe(
-      "www.example.com/"
-    );
+  it("strips out ctrl chars", () => {
+    expect(
+      sanitizeUrl("www.example.com/\u200D\u0000\u001F\x00\x1F\uFEFFfoo")
+    ).toBe("www.example.com/foo");
   });
 
   it("replaces blank urls with about:blank", () => {
@@ -198,5 +90,86 @@ describe("sanitizeUrl", () => {
     expect(sanitizeUrl("   http://example.com/path/to:something    ")).toBe(
       "http://example.com/path/to:something"
     );
+  });
+
+  describe("invalid protocols", () => {
+    describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {
+      it(`replaces ${protocol} urls with about:blank`, () => {
+        expect(sanitizeUrl(`${protocol}:alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+      });
+
+      it(`allows ${protocol} urls that start with a letter prefix`, () => {
+        expect(sanitizeUrl(`not_${protocol}:alert(document.domain)`)).toBe(
+          `not_${protocol}:alert(document.domain)`
+        );
+      });
+
+      it(`disallows ${protocol} urls that start with non-\w characters as a suffix for the protocol`, () => {
+        expect(sanitizeUrl(`&!*${protocol}:alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+      });
+
+      it(`disregards capitalization for ${protocol} urls`, () => {
+        // upper case every other letter in protocol name
+        const mixedCapitalizationProtocol = protocol
+          .split("")
+          .map((character, index) => {
+            if (index % 2 === 0) {
+              return character.toUpperCase();
+            }
+            return character;
+          })
+          .join("");
+
+        expect(
+          sanitizeUrl(`${mixedCapitalizationProtocol}:alert(document.domain)`)
+        ).toBe("about:blank");
+      });
+
+      it(`ignores invisible ctrl characters in ${protocol} urls`, () => {
+        const protocolWithControlCharacters = protocol
+          .split("")
+          .map((character, index) => {
+            if (index === 1) {
+              return character + "%EF%BB%BF%EF%BB%BF";
+            } else if (index === 2) {
+              return character + "%e2%80%8b";
+            }
+            return character;
+          })
+          .join("");
+
+        expect(
+          sanitizeUrl(
+            decodeURIComponent(
+              `${protocolWithControlCharacters}:alert(document.domain)`
+            )
+          )
+        ).toBe("about:blank");
+      });
+
+      it(`replaces ${protocol} urls with about:blank when url begins with %20`, () => {
+        expect(
+          sanitizeUrl(
+            decodeURIComponent(`%20%20%20%20${protocol}:alert(document.domain)`)
+          )
+        ).toBe("about:blank");
+      });
+
+      it(`replaces ${protocol} urls with about:blank when ${protocol} url begins with spaces`, () => {
+        expect(sanitizeUrl(`    ${protocol}:alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+      });
+
+      it(`does not replace ${protocol}: if it is not in the scheme of the URL`, () => {
+        expect(sanitizeUrl(`http://example.com#${protocol}:foo`)).toBe(
+          `http://example.com#${protocol}:foo`
+        );
+      });
+    });
   });
 });
