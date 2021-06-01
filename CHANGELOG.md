@@ -1,3 +1,7 @@
+# unreleased
+
+- Fix issue where certain invisible white space characters were not being sanitized (#35)
+
 # 5.0.1
 
 - Fix issue where certain safe characters were being filtered out (#31 thanks @akirchmyer)
