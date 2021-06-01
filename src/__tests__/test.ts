@@ -2,53 +2,53 @@
 import { sanitizeUrl } from "..";
 
 describe("sanitizeUrl", () => {
-  it("does not alter http URLs", () => {
+  it("does not alter http URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com/path/to:something")).toBe(
       "http://example.com/path/to:something"
     );
   });
 
-  it("does not alter http URLs with ports", () => {
+  it("does not alter http URLs with ports with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com:4567/path/to:something")).toBe(
       "http://example.com:4567/path/to:something"
     );
   });
 
-  it("does not alter https URLs", () => {
+  it("does not alter https URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("https://example.com")).toBe("https://example.com");
   });
 
-  it("does not alter https URLs with ports", () => {
+  it("does not alter https URLs with ports with alphanumeric characters", () => {
     expect(sanitizeUrl("https://example.com:4567/path/to:something")).toBe(
       "https://example.com:4567/path/to:something"
     );
   });
 
-  it("does not alter relative-path reference URLs", () => {
+  it("does not alter relative-path reference URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("./path/to/my.json")).toBe("./path/to/my.json");
   });
 
-  it("does not alter absolute-path reference URLs", () => {
+  it("does not alter absolute-path reference URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("/path/to/my.json")).toBe("/path/to/my.json");
   });
 
-  it("does not alter protocol-less network-path URLs", () => {
+  it("does not alter protocol-less network-path URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("//google.com/robots.txt")).toBe(
       "//google.com/robots.txt"
     );
   });
 
-  it("does not alter protocol-less URLs", () => {
+  it("does not alter protocol-less URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("www.example.com")).toBe("www.example.com");
   });
 
-  it("does not alter deep-link urls", () => {
+  it("does not alter deep-link urls with alphanumeric characters", () => {
     expect(sanitizeUrl("com.braintreepayments.demo://example")).toBe(
       "com.braintreepayments.demo://example"
     );
   });
 
-  it("does not alter mailto urls", () => {
+  it("does not alter mailto urls with alphanumeric characters", () => {
     expect(sanitizeUrl("mailto:test@example.com?subject=hello+world")).toBe(
       "mailto:test@example.com?subject=hello+world"
     );
@@ -66,10 +66,10 @@ describe("sanitizeUrl", () => {
     );
   });
 
-  it("should strip out control chars", () => {
-    expect(sanitizeUrl("www.example.com/\u0000\u001F\x00\x1F")).toBe(
-      "www.example.com/"
-    );
+  it("strips out ctrl chars", () => {
+    expect(
+      sanitizeUrl("www.example.com/\u200D\u0000\u001F\x00\x1F\uFEFFfoo")
+    ).toBe("www.example.com/foo");
   });
 
   it("replaces blank urls with about:blank", () => {
