@@ -1,4 +1,4 @@
-# unreleased
+# 5.0.2
 
 - Fix issue where certain invisible white space characters were not being sanitized (#35)
 
