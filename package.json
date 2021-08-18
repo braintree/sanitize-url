@@ -24,13 +24,13 @@
   },
   "homepage": "https://github.com/braintree/sanitize-url#readme",
   "devDependencies": {
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.1",
     "chai": "^4.3.4",
-    "eslint": "^7.31.0",
+    "eslint": "^7.32.0",
     "eslint-config-braintree": "^5.0.0-typescript-prep-rc.18",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.3.5"
   },
   "jest": {
@@ -38,7 +38,7 @@
     "preset": "ts-jest",
     "globals": {
       "ts-jest": {
-        "tsConfig": "src/__tests__/tsconfig.json"
+        "tsconfig": "src/__tests__/tsconfig.json"
       }
     }
   }
