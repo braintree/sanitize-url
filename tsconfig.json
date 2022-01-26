@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
+    "allowUmdGlobalAccess": false,
     "outDir": "./dist",
     "allowJs": true,
     "strict": true,
     "target": "es5",
+    "module": "UMD",
+    "moduleResolution": "node",
     "lib": ["es2015", "dom"]
   },
   "include": ["./src/**/*"],
