@@ -1,28 +1,25 @@
 {
-  "name": "@braintree/sanitize-url",
+  "name": "@contaazul/sanitize-url",
   "version": "5.0.2",
   "description": "A url sanitizer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "",
   "scripts": {
-    "prepublishOnly": "npm run build",
-    "prebuild": "prettier --write .",
     "build": "tsc --declaration",
     "lint": "eslint --ext js,ts .",
-    "posttest": "npm run lint",
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/braintree/sanitize-url.git"
+    "url": "git+https://github.com/contaazul/sanitize-url.git"
   },
   "keywords": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/braintree/sanitize-url/issues"
+    "url": "https://github.com/contaazul/sanitize-url/issues"
   },
-  "homepage": "https://github.com/braintree/sanitize-url#readme",
+  "homepage": "https://github.com/contaazul/sanitize-url#readme",
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
