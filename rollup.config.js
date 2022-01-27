@@ -12,7 +12,7 @@ export default {
     },
     {
       compact: true,
-      file: "dist/index.mim.js",
+      file: "dist/index.min.js",
       format: "umd",
       name: "sanitize-url",
       plugins: [terser()],
