@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-npm install -S @braintree/sanitize-url
+yarn add @contaazul/sanitize-url --registry http://npm.dev.contaazul.local
 ```
 
 ## Usage

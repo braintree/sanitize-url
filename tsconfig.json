@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
+    "allowUmdGlobalAccess": false,
     "outDir": "./dist",
     "allowJs": true,
     "strict": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true,
     "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
     "lib": ["es2015", "dom"]
   },
   "include": ["./src/**/*"],
