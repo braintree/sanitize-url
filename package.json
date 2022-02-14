@@ -4,7 +4,7 @@
   "description": "A url sanitizer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "author": "",
+  "author": "DOMPhysis <domphysis@contaazul.com>",
   "files": [
     "dist/*",
     "src/index.ts",
@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/contaazul/sanitize-url#readme",
   "devDependencies": {
-    "@ca-tools-front/release-it-plugin-build": "^2.4.8",
-    "@ca-tools-front/release-it-plugin-sonar": "^2.4.8",
+    "@ca-tools-front/prettier-config": "^3.0.0",
+    "@ca-tools-front/release-it-config": "^3.1.2",
     "@rollup/plugin-typescript": "^8.3.0",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
