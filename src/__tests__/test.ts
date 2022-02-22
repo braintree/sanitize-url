@@ -92,6 +92,30 @@ describe("sanitizeUrl", () => {
     );
   });
 
+  it("decodes html entities", () => {
+    // all these decode to javascript:alert('xss');
+    const attackVectors = [
+      "&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041",
+      "&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#88;&#83;&#83;&#39;&#41;",
+      "&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29",
+      "jav&#x09;ascript:alert('XSS');",
+      " &#14; javascript:alert('XSS');",
+    ];
+
+    attackVectors.forEach((vector) => {
+      expect(sanitizeUrl(vector)).toBe("about:blank");
+    });
+
+    // https://example.com/javascript:alert('XSS')
+    // since the javascript is the url path, and not the protocol,
+    // this url is technically sanitized
+    expect(
+      sanitizeUrl(
+        "&#104;&#116;&#116;&#112;&#115;&#0000058//&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;/&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041"
+      )
+    ).toBe("https://example.com/javascript:alert('XSS')");
+  });
+
   describe("invalid protocols", () => {
     describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {
       it(`replaces ${protocol} urls with about:blank`, () => {
