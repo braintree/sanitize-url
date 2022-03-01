@@ -1,3 +1,23 @@
+# unreleased
+
+**Breaking Changes**
+
+- Decode HTML characters automatically that would result in an XSS vulnerability when rendering links via a server rendered HTML file
+
+```js
+// decodes to javacript:alert('XSS')
+const vulnerableUrl =
+  "&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041";
+
+sanitizeUrl(vulnerableUrl); // 'about:blank'
+
+const okUrl = "https://example.com/" + vulnerableUrl;
+
+// since the javascript bit is in the path instead of the protocol
+// this is successfully sanitized
+sanitizeUrl(okUrl); // 'https://example.com/javascript:alert('XSS');
+```
+
 # 5.0.2
 
 - Fix issue where certain invisible white space characters were not being sanitized (#35)
