@@ -1,4 +1,4 @@
-# unreleased
+# 6.0.0
 
 **Breaking Changes**
 
