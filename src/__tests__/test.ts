@@ -136,6 +136,15 @@ describe("sanitizeUrl", () => {
         );
       });
 
+      it(`disallows ${protocol} urls that use &colon; for the colon portion of the url`, () => {
+        expect(sanitizeUrl(`${protocol}&colon;alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+        expect(sanitizeUrl(`${protocol}&COLON;alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+      });
+
       it(`disregards capitalization for ${protocol} urls`, () => {
         // upper case every other letter in protocol name
         const mixedCapitalizationProtocol = protocol

@@ -2,7 +2,7 @@ const invalidProtocolRegex = /^([^\w]*)(javascript|data|vbscript)/im;
 const htmlEntitiesRegex = /&#(\w+)(^\w|;)?/g;
 const ctrlCharactersRegex =
   /[\u0000-\u001F\u007F-\u009F\u2000-\u200D\uFEFF]/gim;
-const urlSchemeRegex = /^([^:]+):/gm;
+const urlSchemeRegex = /^.+(:|&colon;)/gim;
 const relativeFirstCharacters = [".", "/"];
 
 function isRelativeUrlWithoutProtocol(url: string): boolean {

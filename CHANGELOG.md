@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## unreleased
+
+- Fix issue where urls in the form `javascript&colon;alert('xss');` were not properly sanitized
+
 ## 6.0.0
 
 **Breaking Changes**
