@@ -1,4 +1,6 @@
-# 6.0.0
+# CHANGELOG
+
+## 6.0.0
 
 **Breaking Changes**
 
@@ -18,29 +20,27 @@ const okUrl = "https://example.com/" + vulnerableUrl;
 sanitizeUrl(okUrl); // 'https://example.com/javascript:alert('XSS');
 ```
 
-# 5.0.2
+## 5.0.2
 
 - Fix issue where certain invisible white space characters were not being sanitized (#35)
 
-# 5.0.1
+## 5.0.1
 
 - Fix issue where certain safe characters were being filtered out (#31 thanks @akirchmyer)
 
-# 5.0.0
+## 5.0.0
 
 _Breaking Changes_
 
 - Sanitize vbscript urls (thanks @vicnicius)
 
-# 4.1.1
+## 4.1.1
 
 - Fixup path to type declaration (closes #25)
 
-# 4.1.0
+## 4.1.0
 
 - Add typescript types
-
-# CHANGELOG
 
 ## 4.0.1
 
