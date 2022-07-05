@@ -194,6 +194,11 @@ describe("sanitizeUrl", () => {
           `http://example.com#${protocol}:foo`
         );
       });
+
+      it(`replaces ${protocol} urls with passed default url`, () => {
+        const defaultURL = 'http://example.com/path/to:something-else'
+        expect(sanitizeUrl(`${protocol}:alert(document.domain)`, defaultURL)).toBe(defaultURL);
+      });
     });
   });
 });

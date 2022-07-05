@@ -16,13 +16,13 @@ function decodeHtmlCharacters(str: string) {
   });
 }
 
-export function sanitizeUrl(url?: string): string {
+export function sanitizeUrl(url?: string, defaultURL: string = "about:blank"): string {
   const sanitizedUrl = decodeHtmlCharacters(url || "")
     .replace(ctrlCharactersRegex, "")
     .trim();
 
   if (!sanitizedUrl) {
-    return "about:blank";
+    return defaultURL;
   }
 
   if (isRelativeUrlWithoutProtocol(sanitizedUrl)) {
@@ -38,7 +38,7 @@ export function sanitizeUrl(url?: string): string {
   const urlScheme = urlSchemeParseResults[0];
 
   if (invalidProtocolRegex.test(urlScheme)) {
-    return "about:blank";
+    return defaultURL;
   }
 
   return sanitizedUrl;

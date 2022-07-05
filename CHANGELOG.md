@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## unreleased
+
+- Pass default url to be returned (if present) instead of "about:blank"
+
 ## 6.0.0
 
 **Breaking Changes**
