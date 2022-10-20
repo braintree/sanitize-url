@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## unreleased
+## 6.0.1
 
 - Fix issue where urls in the form `javascript&colon;alert('xss');` were not properly sanitized
 - Fix issue where urls in the form `javasc&Tab;ript:alert('XSS');` were not properly sanitized
