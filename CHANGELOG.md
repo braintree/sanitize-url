@@ -3,6 +3,7 @@
 ## unreleased
 
 - Fix issue where urls in the form `javascript&colon;alert('xss');` were not properly sanitized
+- Fix issue where urls in the form `javasc&Tab;ript:alert('XSS');` were not properly sanitized
 
 ## 6.0.0
 
