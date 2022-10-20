@@ -100,6 +100,7 @@ describe("sanitizeUrl", () => {
       "&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29",
       "jav&#x09;ascript:alert('XSS');",
       " &#14; javascript:alert('XSS');",
+      "javasc&Tab;ript: alert('XSS');",
     ];
 
     attackVectors.forEach((vector) => {
@@ -132,6 +133,15 @@ describe("sanitizeUrl", () => {
 
       it(`disallows ${protocol} urls that start with non-\w characters as a suffix for the protocol`, () => {
         expect(sanitizeUrl(`&!*${protocol}:alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+      });
+
+      it(`disallows ${protocol} urls that use &colon; for the colon portion of the url`, () => {
+        expect(sanitizeUrl(`${protocol}&colon;alert(document.domain)`)).toBe(
+          "about:blank"
+        );
+        expect(sanitizeUrl(`${protocol}&COLON;alert(document.domain)`)).toBe(
           "about:blank"
         );
       });
