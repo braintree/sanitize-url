@@ -94,7 +94,7 @@ describe("sanitizeUrl", () => {
 
   it("removes newline entities from urls", () => {
     expect(sanitizeUrl("https://example.com&NewLine;&NewLine;/something")).toBe(
-      "https://google.com/This is not a URL :)"
+      "https://google.com/something)"
     );
   });
 
