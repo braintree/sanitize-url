@@ -92,6 +92,12 @@ describe("sanitizeUrl", () => {
     );
   });
 
+  it("removes newline entities from urls", () => {
+    expect(sanitizeUrl("https://example.com&NewLine;&NewLine;/something")).toBe(
+      "https://example.com/something"
+    );
+  });
+
   it("decodes html entities", () => {
     // all these decode to javascript:alert('xss');
     const attackVectors = [
