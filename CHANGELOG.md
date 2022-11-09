@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 6.0.2
+
 - Fix issue where urls in the form `https://example.com&NewLine;&NewLine;/something` were not properly sanitized
 
 ## 6.0.1
