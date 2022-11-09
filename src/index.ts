@@ -1,6 +1,6 @@
 const invalidProtocolRegex = /^([^\w]*)(javascript|data|vbscript)/im;
 const htmlEntitiesRegex = /&#(\w+)(^\w|;)?/g;
-const htmlSpaceEntityRegex = /&(tab|newline);/gi;
+const htmlCtrlEntityRegex = /&(newline|tab);/gi;
 const ctrlCharactersRegex =
   /[\u0000-\u001F\u007F-\u009F\u2000-\u200D\uFEFF]/gim;
 const urlSchemeRegex = /^.+(:|&colon;)/gim;
@@ -12,7 +12,6 @@ function isRelativeUrlWithoutProtocol(url: string): boolean {
 
 // adapted from https://stackoverflow.com/a/29824550/2601552
 function decodeHtmlCharacters(str: string) {
-  str = str.replace(htmlSpaceEntityRegex, "");
   return str.replace(htmlEntitiesRegex, (match, dec) => {
     return String.fromCharCode(dec);
   });
@@ -20,6 +19,7 @@ function decodeHtmlCharacters(str: string) {
 
 export function sanitizeUrl(url?: string): string {
   const sanitizedUrl = decodeHtmlCharacters(url || "")
+    .replace(htmlCtrlEntityRegex, "")
     .replace(ctrlCharactersRegex, "")
     .trim();
 
