@@ -24,16 +24,17 @@
   },
   "homepage": "https://github.com/braintree/sanitize-url#readme",
   "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "@typescript-eslint/eslint-plugin": "^5.19.0",
-    "chai": "^4.3.6",
-    "eslint": "^8.13.0",
+    "@types/jest": "^29.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.35.0",
     "eslint-config-braintree": "^6.0.0-typescript-prep-rc.2",
-    "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.5.1",
-    "prettier": "^2.6.2",
-    "ts-jest": "^27.1.4",
-    "typescript": "^4.6.3"
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "prettier": "^2.8.4",
+    "ts-jest": "^29.0.5",
+    "typescript": "^4.9.5"
   },
   "jest": {
     "testEnvironment": "jsdom",
