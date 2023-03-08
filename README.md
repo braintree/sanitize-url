@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-yarn add @contaazul/sanitize-url --registry http://npm.dev.contaazul.local
+yarn add @contaazul/sanitize-url --registry http://npm.prod.contaazul.local
 ```
 
 ## Usage

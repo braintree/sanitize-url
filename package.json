@@ -4,7 +4,6 @@
   "description": "A url sanitizer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "author": "DOMPhysis <domphysis@contaazul.com>",
   "files": [
     "dist/*",
     "src/index.ts",
@@ -13,33 +12,28 @@
     "package.json"
   ],
   "scripts": {
+    "prepack": "ca-pinst --disable",
+    "postpack": "ca-pinst --enable",
+    "preinstall": "yarn dlx only-allow yarn",
     "build": "tsc && rollup -c",
     "lint": "eslint --ext js,ts .",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/contaazul/sanitize-url.git"
-  },
-  "keywords": [],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/contaazul/sanitize-url/issues"
-  },
-  "homepage": "https://github.com/contaazul/sanitize-url#readme",
   "devDependencies": {
-    "@ca-tools-front/prettier-config": "^3.0.0",
-    "@ca-tools-front/release-it-config": "^3.1.2",
+    "@ca-tools-front/prettier-config": "^7.0.3",
+    "@ca-tools-front/release-it-config": "^7.0.3",
     "@rollup/plugin-typescript": "^8.3.0",
     "@types/jest": "^27.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
     "chai": "^4.3.4",
+    "contaazul-pinst": "^1.0.2",
     "eslint": "^8.6.0",
     "eslint-config-braintree": "^6.0.0-typescript-prep-rc.2",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.5",
-    "prettier": "^2.5.1",
-    "release-it": "^14.12.4",
+    "prettier": "^2.8.4",
+    "release-it": "^14.14.3",
     "rollup": "^2.66.1",
     "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^27.1.2",
@@ -53,5 +47,27 @@
         "tsconfig": "src/__tests__/tsconfig.json"
       }
     }
-  }
+  },
+  "publishConfig": {
+    "registry": "http://npm.prod.contaazul.local"
+  },
+  "packageManager": "yarn@3.4.1",
+  "selfEngines": {
+    "node": ">=18",
+    "yarn": ">=3.x"
+  },
+  "homepage": "https://github.com/ContaAzul/sanitize-url",
+  "author": {
+    "name": "ContaAzul",
+    "email": "domphysis@contaazul.com",
+    "url": "https://github.com/ContaAzul/sanitize-url"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ContaAzul/sanitize-url.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ContaAzul/sanitize-url/issues"
+  },
+  "license": "MIT"
 }
