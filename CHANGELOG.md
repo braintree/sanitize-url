@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Unreleased
+
+- Add null check to beginning of `sanitizeUrl` function
+
 ## 6.0.2
 
 - Fix issue where urls in the form `https://example.com&NewLine;&NewLine;/something` were not properly sanitized
