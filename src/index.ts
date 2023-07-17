@@ -18,6 +18,9 @@ function decodeHtmlCharacters(str: string) {
 }
 
 export function sanitizeUrl(url?: string): string {
+  if (!url) {
+    return "about:blank";
+  }
   const sanitizedUrl = decodeHtmlCharacters(url || "")
     .replace(htmlCtrlEntityRegex, "")
     .replace(ctrlCharactersRegex, "")
