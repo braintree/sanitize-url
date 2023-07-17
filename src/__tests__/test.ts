@@ -1,5 +1,5 @@
 /* eslint-disable no-script-url */
-import { sanitizeUrl } from "..";
+import { sanitizeUrl, BLANK_URL } from "..";
 
 describe("sanitizeUrl", () => {
   it("does not alter http URLs with alphanumeric characters", () => {
@@ -72,18 +72,18 @@ describe("sanitizeUrl", () => {
     ).toBe("www.example.com/foo");
   });
 
-  it("replaces blank urls with about:blank", () => {
-    expect(sanitizeUrl("")).toBe("about:blank");
+  it(`replaces blank urls with ${BLANK_URL}`, () => {
+    expect(sanitizeUrl("")).toBe(BLANK_URL);
   });
 
-  it("replaces null values with about:blank", () => {
+  it(`replaces null values with ${BLANK_URL}`, () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    expect(sanitizeUrl(null)).toBe("about:blank");
+    expect(sanitizeUrl(null)).toBe(BLANK_URL);
   });
 
-  it("replaces undefined values with about:blank", () => {
-    expect(sanitizeUrl()).toBe("about:blank");
+  it(`replaces undefined values with ${BLANK_URL}`, () => {
+    expect(sanitizeUrl()).toBe(BLANK_URL);
   });
 
   it("removes whitespace from urls", () => {
@@ -110,7 +110,7 @@ describe("sanitizeUrl", () => {
     ];
 
     attackVectors.forEach((vector) => {
-      expect(sanitizeUrl(vector)).toBe("about:blank");
+      expect(sanitizeUrl(vector)).toBe(BLANK_URL);
     });
 
     // https://example.com/javascript:alert('XSS')
@@ -125,9 +125,9 @@ describe("sanitizeUrl", () => {
 
   describe("invalid protocols", () => {
     describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {
-      it(`replaces ${protocol} urls with about:blank`, () => {
+      it(`replaces ${protocol} urls with ${BLANK_URL}`, () => {
         expect(sanitizeUrl(`${protocol}:alert(document.domain)`)).toBe(
-          "about:blank"
+          BLANK_URL
         );
       });
 
@@ -139,16 +139,16 @@ describe("sanitizeUrl", () => {
 
       it(`disallows ${protocol} urls that start with non-\w characters as a suffix for the protocol`, () => {
         expect(sanitizeUrl(`&!*${protocol}:alert(document.domain)`)).toBe(
-          "about:blank"
+          BLANK_URL
         );
       });
 
       it(`disallows ${protocol} urls that use &colon; for the colon portion of the url`, () => {
         expect(sanitizeUrl(`${protocol}&colon;alert(document.domain)`)).toBe(
-          "about:blank"
+          BLANK_URL
         );
         expect(sanitizeUrl(`${protocol}&COLON;alert(document.domain)`)).toBe(
-          "about:blank"
+          BLANK_URL
         );
       });
 
@@ -166,7 +166,7 @@ describe("sanitizeUrl", () => {
 
         expect(
           sanitizeUrl(`${mixedCapitalizationProtocol}:alert(document.domain)`)
-        ).toBe("about:blank");
+        ).toBe(BLANK_URL);
       });
 
       it(`ignores invisible ctrl characters in ${protocol} urls`, () => {
@@ -188,20 +188,20 @@ describe("sanitizeUrl", () => {
               `${protocolWithControlCharacters}:alert(document.domain)`
             )
           )
-        ).toBe("about:blank");
+        ).toBe(BLANK_URL);
       });
 
-      it(`replaces ${protocol} urls with about:blank when url begins with %20`, () => {
+      it(`replaces ${protocol} urls with ${BLANK_URL} when url begins with %20`, () => {
         expect(
           sanitizeUrl(
             decodeURIComponent(`%20%20%20%20${protocol}:alert(document.domain)`)
           )
-        ).toBe("about:blank");
+        ).toBe(BLANK_URL);
       });
 
-      it(`replaces ${protocol} urls with about:blank when ${protocol} url begins with spaces`, () => {
+      it(`replaces ${protocol} urls with ${BLANK_URL} when ${protocol} url begins with spaces`, () => {
         expect(sanitizeUrl(`    ${protocol}:alert(document.domain)`)).toBe(
-          "about:blank"
+          BLANK_URL
         );
       });
 
