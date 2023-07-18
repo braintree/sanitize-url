@@ -6,6 +6,8 @@ const ctrlCharactersRegex =
 const urlSchemeRegex = /^.+(:|&colon;)/gim;
 const relativeFirstCharacters = [".", "/"];
 
+export const BLANK_URL = "about:blank";
+
 function isRelativeUrlWithoutProtocol(url: string): boolean {
   return relativeFirstCharacters.indexOf(url[0]) > -1;
 }
@@ -18,13 +20,17 @@ function decodeHtmlCharacters(str: string) {
 }
 
 export function sanitizeUrl(url?: string): string {
-  const sanitizedUrl = decodeHtmlCharacters(url || "")
+  if (!url) {
+    return BLANK_URL;
+  }
+
+  const sanitizedUrl = decodeHtmlCharacters(url)
     .replace(htmlCtrlEntityRegex, "")
     .replace(ctrlCharactersRegex, "")
     .trim();
 
   if (!sanitizedUrl) {
-    return "about:blank";
+    return BLANK_URL;
   }
 
   if (isRelativeUrlWithoutProtocol(sanitizedUrl)) {
@@ -40,7 +46,7 @@ export function sanitizeUrl(url?: string): string {
   const urlScheme = urlSchemeParseResults[0];
 
   if (invalidProtocolRegex.test(urlScheme)) {
-    return "about:blank";
+    return BLANK_URL;
   }
 
   return sanitizedUrl;
