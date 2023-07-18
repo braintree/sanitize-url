@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add null check to beginning of `sanitizeUrl` function
+- Add null check to beginning of `sanitizeUrl` function ([#54](https://github.com/braintree/sanitize-url/issues/54))
 
 ## 6.0.2
 
