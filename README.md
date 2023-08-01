@@ -27,3 +27,12 @@ sanitizeUrl(
   "&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041"
 ); // 'about:blank'
 ```
+## Testing
+
+This library uses [Vitest](https://vitest.dev/). All testing dependencies
+will be installed upon `npm install` and the test suite can be executed with
+`npm test`. Running the test suite will also run lint checks upon exiting. 
+
+    npm test
+
+  To generate a coverage report, use `npm run coverage`.
