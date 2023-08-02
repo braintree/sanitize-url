@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Add additional null byte sanitization prior to html decoding (#48)
+
 ## 6.0.3
 
 - Add null check to beginning of `sanitizeUrl` function ([#54](https://github.com/braintree/sanitize-url/issues/54))
