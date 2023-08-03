@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## UNRELEASED
+## 6.0.4
 
 - Add additional null byte sanitization prior to html decoding (#48)
 
