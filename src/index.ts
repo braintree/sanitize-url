@@ -1,12 +1,12 @@
-const invalidProtocolRegex = /^([^\w]*)(javascript|data|vbscript)/im;
-const htmlEntitiesRegex = /&#(\w+)(^\w|;)?/g;
-const htmlCtrlEntityRegex = /&(newline|tab);/gi;
-const ctrlCharactersRegex =
-  /[\u0000-\u001F\u007F-\u009F\u2000-\u200D\uFEFF]/gim;
-const urlSchemeRegex = /^.+(:|&colon;)/gim;
-const relativeFirstCharacters = [".", "/"];
-
-export const BLANK_URL = "about:blank";
+import {
+  BLANK_URL,
+  ctrlCharactersRegex,
+  htmlCtrlEntityRegex,
+  htmlEntitiesRegex,
+  invalidProtocolRegex,
+  relativeFirstCharacters,
+  urlSchemeRegex,
+} from "./constants";
 
 function isRelativeUrlWithoutProtocol(url: string): boolean {
   return relativeFirstCharacters.indexOf(url[0]) > -1;
