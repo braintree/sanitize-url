@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# Unreleased
+- Update to node v18
+- Update to TypeScript 5
+- Other minor dependency updates
+- Move constant declarations from index file to `constants.ts` file
+
 ## 6.0.4
 
 - Add additional null byte sanitization prior to html decoding (#48)
