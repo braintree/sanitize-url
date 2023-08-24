@@ -2,10 +2,12 @@
 
 # Unreleased
 
-- Update to node v18
-- Update to TypeScript 5
-- Other minor dependency updates
 - Move constant declarations from index file to `constants.ts` file
+- Update to node v18
+
+- Dev Dependency Updates
+  - Update to TypeScript 5
+  - Other minor dependency updates
 
 ## 6.0.4
 
