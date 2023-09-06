@@ -1,5 +1,6 @@
 /* eslint-disable no-script-url */
-import { sanitizeUrl, BLANK_URL } from "..";
+import { sanitizeUrl } from "..";
+import { BLANK_URL } from "../constants";
 
 describe("sanitizeUrl", () => {
   it("does not alter http URLs with alphanumeric characters", () => {
