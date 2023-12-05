@@ -1,6 +1,6 @@
 # CHANGELOG
 
-# Unreleased
+## 7.0.0
 
 - Move constant declarations from index file to `constants.ts` file
 - Update to node v18
