@@ -24,12 +24,19 @@ export function sanitizeUrl(url?: string): string {
   if (!url) {
     return BLANK_URL;
   }
-
-  const sanitizedUrl = decodeHtmlCharacters(url)
-    .replace(htmlCtrlEntityRegex, "")
-    .replace(ctrlCharactersRegex, "")
-    .trim();
-
+  let charsToDecode;
+  let decodedUrl = url;
+  do {
+    decodedUrl = decodeHtmlCharacters(decodedUrl)
+      .replace(htmlCtrlEntityRegex, "")
+      .replace(ctrlCharactersRegex, "")
+      .trim();
+    charsToDecode =
+      decodedUrl.match(ctrlCharactersRegex) ||
+      decodedUrl.match(htmlEntitiesRegex) ||
+      decodedUrl.match(htmlCtrlEntityRegex);
+  } while (charsToDecode && charsToDecode.length > 0);
+  const sanitizedUrl = decodedUrl;
   if (!sanitizedUrl) {
     return BLANK_URL;
   }
