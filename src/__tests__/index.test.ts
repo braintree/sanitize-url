@@ -111,6 +111,11 @@ describe("sanitizeUrl", () => {
       "javasc&#\u0000x09;ript:alert(1)",
       "java&#38;&#38;&#35;78&#59;ewLine&#38;newline&#59;&#59;script&#58;alert&#40;&#39;XSS&#39;&#41;",
       "java&&#78;ewLine&newline;;script:alert('XSS')",
+      // "javascrip\164t:alert()",
+      // "javascrip\nt:alert()",
+      // "javascrip\rt:alert()",
+      "%6Aavascript:alert()"
+      // "javascrip0x2f0x6et:alert()"
     ];
 
     attackVectors.forEach((vector) => {
