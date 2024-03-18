@@ -1,8 +1,5 @@
 # CHANGELOG
 
-## 7.0.1
-- Improve sanitation of HTML Entities
-
 ## 7.0.0
 
 - Move constant declarations from index file to `constants.ts` file
