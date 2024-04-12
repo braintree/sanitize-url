@@ -127,6 +127,12 @@ describe("sanitizeUrl", () => {
     ).toBe("https://example.com/javascript:alert('XSS')");
   });
 
+  it("removes script tags from urls", () => {
+    expect(
+      sanitizeUrl("https://example.com/path/to<script>alert('XSS')</script>")
+    ).toBe("https://example.com/path/toalert('XSS')");
+  });
+
   describe("invalid protocols", () => {
     describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {
       it(`replaces ${protocol} urls with ${BLANK_URL}`, () => {

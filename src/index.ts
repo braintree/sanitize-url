@@ -57,5 +57,9 @@ export function sanitizeUrl(url?: string): string {
     return BLANK_URL;
   }
 
+  const scriptTagPattern = /<(\/|\s)*script.*?>/gim;
+  if (scriptTagPattern.test(sanitizedUrl)) {
+    return sanitizedUrl.replace(scriptTagPattern, "");
+  }
   return sanitizedUrl;
 }
