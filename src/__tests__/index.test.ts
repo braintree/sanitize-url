@@ -127,6 +127,19 @@ describe("sanitizeUrl", () => {
     ).toBe("https://example.com/javascript:alert('XSS')");
   });
 
+  it("removes whitespace escape sequences", () => {
+    const attackVectors = [
+      "javascri\npt:alert('xss')",
+      "javascri\rpt:alert('xss')",
+      "javascri\tpt:alert('xss')",
+      "javascrip\x74t:alert('XSS')",
+    ];
+
+    attackVectors.forEach((vector) => {
+      expect(sanitizeUrl(vector)).toBe(BLANK_URL);
+    });
+  });
+
   describe("invalid protocols", () => {
     describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {
       it(`replaces ${protocol} urls with ${BLANK_URL}`, () => {
