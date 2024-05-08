@@ -1,12 +1,13 @@
 import {
   BLANK_URL,
   ctrlCharactersRegex,
+  hexCodesRegex,
   htmlCtrlEntityRegex,
   htmlEntitiesRegex,
   invalidProtocolRegex,
   relativeFirstCharacters,
   urlSchemeRegex,
-  whitespaceEscapeChars,
+  whitespaceEscapeCharsRegex,
 } from "./constants";
 
 function isRelativeUrlWithoutProtocol(url: string): boolean {
@@ -26,18 +27,19 @@ export function sanitizeUrl(url?: string): string {
     return BLANK_URL;
   }
   let charsToDecode;
-  let decodedUrl = url;
+  let decodedUrl = decodeURIComponent(url);
+
   do {
     decodedUrl = decodeHtmlCharacters(decodedUrl)
       .replace(htmlCtrlEntityRegex, "")
       .replace(ctrlCharactersRegex, "")
-      .replace(whitespaceEscapeChars, "")
+      .replace(whitespaceEscapeCharsRegex, "")
       .trim();
     charsToDecode =
       decodedUrl.match(ctrlCharactersRegex) ||
       decodedUrl.match(htmlEntitiesRegex) ||
       decodedUrl.match(htmlCtrlEntityRegex) ||
-      decodedUrl.match(whitespaceEscapeChars);
+      decodedUrl.match(whitespaceEscapeCharsRegex);
   } while (charsToDecode && charsToDecode.length > 0);
   const sanitizedUrl = decodedUrl;
   if (!sanitizedUrl) {

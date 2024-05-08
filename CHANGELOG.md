@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 7.0.1
+
 - Improve sanitization of HTML entities
 
 ## 7.0.0

@@ -132,7 +132,12 @@ describe("sanitizeUrl", () => {
       "javascri\npt:alert('xss')",
       "javascri\rpt:alert('xss')",
       "javascri\tpt:alert('xss')",
-      "javascrip\x74t:alert('XSS')",
+      "javascrip\\%74t:alert('XSS')",
+      "javascrip%5c%72t:alert()",
+      "javascrip%5Ctt:alert()",
+      "javascrip%255Ctt:alert()",
+      "javascrip%25%35Ctt:alert()",
+      "javascrip%25%35%43tt:alert()",
     ];
 
     attackVectors.forEach((vector) => {
