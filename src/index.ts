@@ -1,7 +1,6 @@
 import {
   BLANK_URL,
   ctrlCharactersRegex,
-  hexCodesRegex,
   htmlCtrlEntityRegex,
   htmlEntitiesRegex,
   invalidProtocolRegex,
