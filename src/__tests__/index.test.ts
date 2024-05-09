@@ -138,6 +138,7 @@ describe("sanitizeUrl", () => {
       "javascrip%255Ctt:alert()",
       "javascrip%25%35Ctt:alert()",
       "javascrip%25%35%43tt:alert()",
+      "javascrip%25%32%35%25%33%35%25%34%33tt:alert()",
     ];
 
     attackVectors.forEach((vector) => {

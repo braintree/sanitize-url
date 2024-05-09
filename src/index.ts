@@ -34,6 +34,7 @@ export function sanitizeUrl(url?: string): string {
       .replace(ctrlCharactersRegex, "")
       .replace(whitespaceEscapeCharsRegex, "")
       .trim();
+    decodedUrl = decodeURIComponent(decodedUrl);
     charsToDecode =
       decodedUrl.match(ctrlCharactersRegex) ||
       decodedUrl.match(htmlEntitiesRegex) ||
