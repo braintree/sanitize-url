@@ -21,12 +21,23 @@ function decodeHtmlCharacters(str: string) {
   });
 }
 
+function decodeURI(uri: string): string {
+  try {
+    return decodeURIComponent(uri);
+  } catch (e: unknown) {
+    // Ignoring error
+    // It is possible that the URI contains a `%` not associated
+    // with URI/URL-encoding.
+    return uri;
+  }
+}
+
 export function sanitizeUrl(url?: string): string {
   if (!url) {
     return BLANK_URL;
   }
   let charsToDecode;
-  let decodedUrl = decodeURIComponent(url);
+  let decodedUrl = decodeURI(url);
 
   do {
     decodedUrl = decodeHtmlCharacters(decodedUrl)
@@ -34,7 +45,9 @@ export function sanitizeUrl(url?: string): string {
       .replace(ctrlCharactersRegex, "")
       .replace(whitespaceEscapeCharsRegex, "")
       .trim();
-    decodedUrl = decodeURIComponent(decodedUrl);
+
+    decodedUrl = decodeURI(decodedUrl);
+
     charsToDecode =
       decodedUrl.match(ctrlCharactersRegex) ||
       decodedUrl.match(htmlEntitiesRegex) ||
