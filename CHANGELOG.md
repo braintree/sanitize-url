@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## UNRELEASED
+## 7.0.2
 
 - Improve sanitization of whitespace escapes
 
