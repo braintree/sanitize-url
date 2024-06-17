@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Dependencies
+  - Update braces to 3.0.3
+
 ## 7.0.2
 
 - Improve sanitization of whitespace escapes
