@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## UNRELEASED
+## 7.0.3
 
 - Dependencies
   - Update braces to 3.0.3
