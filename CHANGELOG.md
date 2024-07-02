@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.4
+
+- Updates get-func-name to 2.0.2
+
 ## 7.0.3
 
 - Dependencies
