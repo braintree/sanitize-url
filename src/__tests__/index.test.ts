@@ -146,6 +146,23 @@ describe("sanitizeUrl", () => {
       expect(sanitizeUrl(vector)).toBe(BLANK_URL);
     });
   });
+  
+  it("backslash prefixed attack vectors", () => {
+    const attackVectors = [
+      "\fjavascript:alert()",
+      "\vjavascript:alert()",
+      "\tjavascript:alert()",
+      "\njavascript:alert()",
+      "\rjavascript:alert()",
+      "\u0000javascript:alert()",
+      "\u0001javascript:alert()",
+      "\j\av\a\s\cript:alert()",
+    ];
+
+    attackVectors.forEach((vector) => {
+      expect(sanitizeUrl(vector)).toBe(BLANK_URL);
+    });
+  });
 
   describe("invalid protocols", () => {
     describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {

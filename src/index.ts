@@ -29,6 +29,17 @@ function isValidUrl(url: string): boolean {
   }
 }
 
+function decodeURI(uri: string): string {
+  try {
+    return decodeURIComponent(uri);
+  } catch (e: unknown) {
+    // Ignoring error
+    // It is possible that the URI contains a `%` not associated
+    // with URI/URL-encoding.
+    return uri;
+  }
+}
+
 function sanitizeString(str: string): string {
   return str
     .replace(/[^a-zA-Z0-9-_./]/g, '')
@@ -43,7 +54,7 @@ export function sanitizeUrl(url?: string): string {
   }
 
   let charsToDecode;
-  let decodedUrl = url.trim();
+  let decodedUrl = decodeURI(url.trim());
 
   do {
     decodedUrl = decodeHtmlCharacters(decodedUrl)
@@ -51,6 +62,9 @@ export function sanitizeUrl(url?: string): string {
       .replace(ctrlCharactersRegex, "")
       .replace(whitespaceEscapeCharsRegex, "")
       .trim();
+
+    decodedUrl = decodeURI(decodedUrl);
+
     charsToDecode =
       decodedUrl.match(ctrlCharactersRegex) ||
       decodedUrl.match(htmlEntitiesRegex) ||
