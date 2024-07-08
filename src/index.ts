@@ -40,14 +40,6 @@ function decodeURI(uri: string): string {
   }
 }
 
-function sanitizeString(str: string): string {
-  return str
-    .replace(/[^a-zA-Z0-9-_./]/g, '')
-    .replace(/\.+/g, '.')
-    .replace(/^\./, '')
-    .replace(/\.$/, '');
-}
-
 export function sanitizeUrl(url?: string): string {
   if (!url) {
     return BLANK_URL;
