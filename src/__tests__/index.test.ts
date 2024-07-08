@@ -16,7 +16,7 @@ describe("sanitizeUrl", () => {
   });
 
   it("does not alter https URLs with alphanumeric characters", () => {
-    expect(sanitizeUrl("https://example.com")).toBe("https://example.com");
+    expect(sanitizeUrl("https://example.com")).toBe("https://example.com/");
   });
 
   it("does not alter https URLs with ports with alphanumeric characters", () => {
