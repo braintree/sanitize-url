@@ -21,12 +21,7 @@ function decodeHtmlCharacters(str: string) {
 }
 
 function isValidUrl(url: string): boolean {
-  try {
-    new URL(url);
-    return true;
-  } catch (e) {
-    return false;
-  }
+  return URL.canParse(url);
 }
 
 function decodeURI(uri: string): string {
@@ -89,12 +84,12 @@ export function sanitizeUrl(url?: string): string {
   }
 
   // Handle special cases for mailto: and custom deep-link protocols
-  if (urlScheme === 'mailto:' || urlScheme.includes('://')) {
+  if (urlScheme === "mailto:" || urlScheme.includes("://")) {
     return trimmedUrl;
   }
 
   // For http and https URLs, perform additional validation
-  if (urlScheme === 'http:' || urlScheme === 'https:') {
+  if (urlScheme === "http:" || urlScheme === "https:") {
     if (!isValidUrl(trimmedUrl)) {
       return BLANK_URL;
     }

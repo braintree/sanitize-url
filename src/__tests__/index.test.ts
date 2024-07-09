@@ -146,7 +146,7 @@ describe("sanitizeUrl", () => {
       expect(sanitizeUrl(vector)).toBe(BLANK_URL);
     });
   });
-  
+
   it("backslash prefixed attack vectors", () => {
     const attackVectors = [
       "\fjavascript:alert()",
@@ -156,7 +156,7 @@ describe("sanitizeUrl", () => {
       "\rjavascript:alert()",
       "\u0000javascript:alert()",
       "\u0001javascript:alert()",
-      "\j\av\a\s\cript:alert()",
+      "\\j\\av\\a\\s\\cript:alert()",
     ];
 
     attackVectors.forEach((vector) => {
