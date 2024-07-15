@@ -83,23 +83,25 @@ export function sanitizeUrl(url?: string): string {
     return BLANK_URL;
   }
 
+  const backSanitized = trimmedUrl.replace(/\\/g, "/");
+
   // Handle special cases for mailto: and custom deep-link protocols
   if (urlScheme === "mailto:" || urlScheme.includes("://")) {
-    return trimmedUrl;
+    return backSanitized;
   }
 
   // For http and https URLs, perform additional validation
   if (urlScheme === "http:" || urlScheme === "https:") {
-    if (!isValidUrl(trimmedUrl)) {
+    if (!isValidUrl(backSanitized)) {
       return BLANK_URL;
     }
 
-    const url = new URL(trimmedUrl);
+    const url = new URL(backSanitized);
     url.protocol = url.protocol.toLowerCase();
     url.hostname = url.hostname.toLowerCase();
 
     return url.toString();
   }
 
-  return trimmedUrl;
+  return backSanitized;
 }
