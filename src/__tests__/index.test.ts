@@ -156,12 +156,17 @@ describe("sanitizeUrl", () => {
       "\rjavascript:alert()",
       "\u0000javascript:alert()",
       "\u0001javascript:alert()",
-      "\\j\\av\\a\\s\\cript:alert()",
     ];
 
     attackVectors.forEach((vector) => {
       expect(sanitizeUrl(vector)).toBe(BLANK_URL);
     });
+  });
+
+  it("reverses backslashes", () => {
+    const attack = "\\j\\av\\a\\s\\cript:alert()";
+
+    expect(sanitizeUrl(attack)).toBe("/j/av/a/s/cript:alert()");
   });
 
   describe("invalid protocols", () => {
