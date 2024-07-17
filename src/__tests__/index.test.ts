@@ -16,7 +16,7 @@ describe("sanitizeUrl", () => {
   });
 
   it("does not alter https URLs with alphanumeric characters", () => {
-    expect(sanitizeUrl("https://example.com")).toBe("https://example.com");
+    expect(sanitizeUrl("https://example.com")).toBe("https://example.com/");
   });
 
   it("does not alter https URLs with ports with alphanumeric characters", () => {
@@ -145,6 +145,28 @@ describe("sanitizeUrl", () => {
     attackVectors.forEach((vector) => {
       expect(sanitizeUrl(vector)).toBe(BLANK_URL);
     });
+  });
+
+  it("backslash prefixed attack vectors", () => {
+    const attackVectors = [
+      "\fjavascript:alert()",
+      "\vjavascript:alert()",
+      "\tjavascript:alert()",
+      "\njavascript:alert()",
+      "\rjavascript:alert()",
+      "\u0000javascript:alert()",
+      "\u0001javascript:alert()",
+    ];
+
+    attackVectors.forEach((vector) => {
+      expect(sanitizeUrl(vector)).toBe(BLANK_URL);
+    });
+  });
+
+  it("reverses backslashes", () => {
+    const attack = "\\j\\av\\a\\s\\cript:alert()";
+
+    expect(sanitizeUrl(attack)).toBe("/j/av/a/s/cript:alert()");
   });
 
   describe("invalid protocols", () => {

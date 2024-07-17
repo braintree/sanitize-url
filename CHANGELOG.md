@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Update to handle back-slashes
+
 ## 7.0.4
 
 - Updates get-func-name to 2.0.2

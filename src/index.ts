@@ -5,20 +5,23 @@ import {
   htmlEntitiesRegex,
   invalidProtocolRegex,
   relativeFirstCharacters,
-  urlSchemeRegex,
   whitespaceEscapeCharsRegex,
+  urlSchemeRegex,
 } from "./constants";
 
 function isRelativeUrlWithoutProtocol(url: string): boolean {
   return relativeFirstCharacters.indexOf(url[0]) > -1;
 }
 
-// adapted from https://stackoverflow.com/a/29824550/2601552
 function decodeHtmlCharacters(str: string) {
   const removedNullByte = str.replace(ctrlCharactersRegex, "");
   return removedNullByte.replace(htmlEntitiesRegex, (match, dec) => {
     return String.fromCharCode(dec);
   });
+}
+
+function isValidUrl(url: string): boolean {
+  return URL.canParse(url);
 }
 
 function decodeURI(uri: string): string {
@@ -36,8 +39,9 @@ export function sanitizeUrl(url?: string): string {
   if (!url) {
     return BLANK_URL;
   }
+
   let charsToDecode;
-  let decodedUrl = decodeURI(url);
+  let decodedUrl = decodeURI(url.trim());
 
   do {
     decodedUrl = decodeHtmlCharacters(decodedUrl)
@@ -54,7 +58,9 @@ export function sanitizeUrl(url?: string): string {
       decodedUrl.match(htmlCtrlEntityRegex) ||
       decodedUrl.match(whitespaceEscapeCharsRegex);
   } while (charsToDecode && charsToDecode.length > 0);
+
   const sanitizedUrl = decodedUrl;
+
   if (!sanitizedUrl) {
     return BLANK_URL;
   }
@@ -63,17 +69,39 @@ export function sanitizeUrl(url?: string): string {
     return sanitizedUrl;
   }
 
-  const urlSchemeParseResults = sanitizedUrl.match(urlSchemeRegex);
+  // Remove any leading whitespace before checking the URL scheme
+  const trimmedUrl = sanitizedUrl.trimStart();
+  const urlSchemeParseResults = trimmedUrl.match(urlSchemeRegex);
 
   if (!urlSchemeParseResults) {
     return sanitizedUrl;
   }
 
-  const urlScheme = urlSchemeParseResults[0];
+  const urlScheme = urlSchemeParseResults[0].toLowerCase().trim();
 
   if (invalidProtocolRegex.test(urlScheme)) {
     return BLANK_URL;
   }
 
-  return sanitizedUrl;
+  const backSanitized = trimmedUrl.replace(/\\/g, "/");
+
+  // Handle special cases for mailto: and custom deep-link protocols
+  if (urlScheme === "mailto:" || urlScheme.includes("://")) {
+    return backSanitized;
+  }
+
+  // For http and https URLs, perform additional validation
+  if (urlScheme === "http:" || urlScheme === "https:") {
+    if (!isValidUrl(backSanitized)) {
+      return BLANK_URL;
+    }
+
+    const url = new URL(backSanitized);
+    url.protocol = url.protocol.toLowerCase();
+    url.hostname = url.hostname.toLowerCase();
+
+    return url.toString();
+  }
+
+  return backSanitized;
 }
