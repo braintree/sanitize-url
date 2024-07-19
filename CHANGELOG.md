@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## UNRELEASED
+## 7.1.0
 
-- Update to handle back-slashes
+- Updated to handle back-slashes
 
 ## 7.0.4
 
