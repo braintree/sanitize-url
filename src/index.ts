@@ -21,7 +21,13 @@ function decodeHtmlCharacters(str: string) {
 }
 
 function isValidUrl(url: string): boolean {
-  return URL.canParse(url);
+  try {
+    // We can replace this with URL.canParse() once it's more widely available
+    new URL(url); // eslint-disable-line no-new -- We're only checking for exceptions
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 function decodeURI(uri: string): string {
