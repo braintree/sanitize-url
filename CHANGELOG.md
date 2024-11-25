@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+- Breaking Changes
+  - happy-dom to 15.11.6
+
 - Update (sub-)dependencies
   - cross-spawn to 7.0.6
   - micromatch to 4.0.8
