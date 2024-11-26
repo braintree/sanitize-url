@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Breaking Changes
+  - happy-dom to 15.11.6
+
+- Update (sub-)dependencies
+  - cross-spawn to 7.0.6
+  - micromatch to 4.0.8
+  - vite to 4.5.5
+
 ## 7.1.0
 
 - Updated to handle back-slashes
