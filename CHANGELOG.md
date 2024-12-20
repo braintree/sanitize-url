@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## UNRELEASED
+## 7.1.1
 
-- Breaking Changes
+- DevDependency Changes
   - happy-dom to 15.11.6
 
 - Update (sub-)dependencies
