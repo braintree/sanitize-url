@@ -11,13 +11,13 @@ npm install -S @braintree/sanitize-url
 ```js
 var sanitizeUrl = require("@braintree/sanitize-url").sanitizeUrl;
 
-sanitizeUrl("https://example.com"); // 'https://example.com'
-sanitizeUrl("http://example.com"); // 'http://example.com'
+sanitizeUrl("https://example.com"); // 'https://example.com/'
+sanitizeUrl("http://example.com"); // 'http://example.com/'
 sanitizeUrl("www.example.com"); // 'www.example.com'
 sanitizeUrl("mailto:hello@example.com"); // 'mailto:hello@example.com'
 sanitizeUrl(
   "&#104;&#116;&#116;&#112;&#115;&#0000058//&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;"
-); // https://example.com
+); // https://example.com/
 
 sanitizeUrl("javascript:alert(document.domain)"); // 'about:blank'
 sanitizeUrl("jAvasCrIPT:alert(document.domain)"); // 'about:blank'
