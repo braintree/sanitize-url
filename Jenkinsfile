@@ -1,3 +1,2 @@
-@Library('frontend-pipeline-lib') _
-
+@Library('jenkins-pipeline-lib-frontend') _
 pipelineFrontendEntrypoint()

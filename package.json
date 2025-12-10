@@ -17,7 +17,9 @@
     "preinstall": "yarn dlx only-allow yarn",
     "build": "tsc && rollup -c",
     "lint": "eslint --ext js,ts .",
-    "test": "jest"
+    "test": "jest",
+    "release": "release-it --config release-it.config.js",
+    "release:publish": "yarn npm publish"
   },
   "devDependencies": {
     "@ca-tools-front/prettier-config": "^7.0.3",
@@ -46,15 +48,16 @@
       "ts-jest": {
         "tsconfig": "src/__tests__/tsconfig.json"
       }
-    }
+    },
+    "collectCoverage": true
   },
   "publishConfig": {
-    "registry": "http://npm.prod.contaazul.local"
+    "registry": "http://npm.cicd.contaazul.local"
   },
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@4.12.0",
   "selfEngines": {
-    "node": ">=18",
-    "yarn": ">=3.x"
+    "node": ">=24",
+    "yarn": ">=4.x"
   },
   "homepage": "https://github.com/ContaAzul/sanitize-url",
   "author": {
