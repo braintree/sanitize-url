@@ -28,6 +28,15 @@ sanitizeUrl(
 ); // 'about:blank'
 ```
 
+### Parameters
+
+| Name     | Usage                                                                                                                                                                          | Notes              |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
+| `url`    | The string URL you want to sanitize, which may or may not contain dangerous text.                                                                                              | Optional.          |
+| `decode` | A boolean describing if you want the URL to be URI-decoded at runtime. If `false`, your URL will not be decoded while searching for dangerous text. _Please use with caution._ | Defaults to `true` |
+
+Returns a sanitized version of the string, or `about:blank` if the URL is invalid.
+
 ## Testing
 
 This library uses [Vitest](https://vitest.dev/). All testing dependencies

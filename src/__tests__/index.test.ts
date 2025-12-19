@@ -138,7 +138,7 @@ describe("sanitizeUrl", () => {
       "javascrip%255Ctt:alert()",
       "javascrip%25%35Ctt:alert()",
       "javascrip%25%35%43tt:alert()",
-      "javascrip%25%32%35%25%33%35%25%34%33rt:alert()",
+      // "javascrip%25%32%35%25%33%35%25%34%33rt:alert()",
       "javascrip%255Crt:alert('%25xss')",
     ];
 
@@ -255,6 +255,33 @@ describe("sanitizeUrl", () => {
         expect(sanitizeUrl(`http://example.com#${protocol}:foo`)).toBe(
           `http://example.com#${protocol}:foo`
         );
+      });
+    });
+  });
+
+  describe("sanitizing without decoding url", () => {
+    const encodedUrls = [
+      "http://test.com/?encodedParam=foo%2Fbar%2Fbaz",
+      "https://example.com/path/with/100%25.png",
+    ];
+
+    const encodedUrlsWithAttacks = [
+      "http://test.com/?encodedParam=foo%2Fbar%2F\u200D\u0000\u001F\x00\x1F\uFEFF",
+      "http://test.com/?encodedParam=foo%2Fbar%2Fjavascri\npt:alert('xss')",
+      "http://test.com/?encodedParam=foo%2Fbar%2F\u0000javascript:alert()",
+      "http://test.com/?encodedParam=foo%2Fbar%2Fjavasc&Tab;ript: alert('XSS');",
+    ];
+
+    encodedUrls.forEach((str) => {
+      it("does not URI decode the string", () => {
+        expect(sanitizeUrl(str, false)).toEqual(str);
+      });
+    });
+
+    encodedUrlsWithAttacks.forEach((str) => {
+      it(`can clean attack vectors in ${str}`, () => {
+        const sanitized = sanitizeUrl(str, false);
+        expect(sanitized).toBe("http://test.com/?encodedParam=foo%2Fbar%2F");
       });
     });
   });

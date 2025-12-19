@@ -35,13 +35,19 @@ function decodeURI(uri: string): string {
   }
 }
 
-export function sanitizeUrl(url?: string): string {
+/**
+ * Sanitizes a given URL from attack vectors like ctrl characters, html entities, script tags, etc.
+ * @param url a string url to be sanitized
+ * @param decode a boolean to determine if the url should be URL decoded. Defaults to `true`. **Modify at your own risk.**
+ * @returns a sanitized version of the URL, or `about:blank` if harmful elements have been detected
+ */
+export function sanitizeUrl(url?: string, decode = true): string {
   if (!url) {
     return BLANK_URL;
   }
 
   let charsToDecode;
-  let decodedUrl = decodeURI(url.trim());
+  let decodedUrl = decode ? decodeURI(url.trim()) : url.trim();
 
   do {
     decodedUrl = decodeHtmlCharacters(decodedUrl)
@@ -50,7 +56,7 @@ export function sanitizeUrl(url?: string): string {
       .replace(whitespaceEscapeCharsRegex, "")
       .trim();
 
-    decodedUrl = decodeURI(decodedUrl);
+    decodedUrl = decode ? decodeURI(decodedUrl) : decodedUrl;
 
     charsToDecode =
       decodedUrl.match(ctrlCharactersRegex) ||
