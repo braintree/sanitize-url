@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Update dependencies
+  - @types/jest to 30.0.0
+  - @vitest/coverage-v8 to 4.0.16
+  - chai to 6.2.2
+  - eslint-plugin-prettier to 5.5.4
+  - happy-dom to 20.0.11
+  - prettier to 3.7.4
+  - typescript to 5.9.3
+  - vitest to 4.0.16
+- Update Node to v24
+
 ## 7.1.1
 
 - DevDependency Changes
