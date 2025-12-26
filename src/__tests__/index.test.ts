@@ -5,13 +5,13 @@ import { BLANK_URL } from "../constants";
 describe("sanitizeUrl", () => {
   it("does not alter http URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com/path/to:something")).toBe(
-      "http://example.com/path/to:something"
+      "http://example.com/path/to:something",
     );
   });
 
   it("does not alter http URLs with ports with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com:4567/path/to:something")).toBe(
-      "http://example.com:4567/path/to:something"
+      "http://example.com:4567/path/to:something",
     );
   });
 
@@ -21,7 +21,7 @@ describe("sanitizeUrl", () => {
 
   it("does not alter https URLs with ports with alphanumeric characters", () => {
     expect(sanitizeUrl("https://example.com:4567/path/to:something")).toBe(
-      "https://example.com:4567/path/to:something"
+      "https://example.com:4567/path/to:something",
     );
   });
 
@@ -35,7 +35,7 @@ describe("sanitizeUrl", () => {
 
   it("does not alter protocol-less network-path URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("//google.com/robots.txt")).toBe(
-      "//google.com/robots.txt"
+      "//google.com/robots.txt",
     );
   });
 
@@ -45,31 +45,31 @@ describe("sanitizeUrl", () => {
 
   it("does not alter deep-link urls with alphanumeric characters", () => {
     expect(sanitizeUrl("com.braintreepayments.demo://example")).toBe(
-      "com.braintreepayments.demo://example"
+      "com.braintreepayments.demo://example",
     );
   });
 
   it("does not alter mailto urls with alphanumeric characters", () => {
     expect(sanitizeUrl("mailto:test@example.com?subject=hello+world")).toBe(
-      "mailto:test@example.com?subject=hello+world"
+      "mailto:test@example.com?subject=hello+world",
     );
   });
 
   it("does not alter urls with accented characters", () => {
     expect(sanitizeUrl("www.example.com/with-áccêntš")).toBe(
-      "www.example.com/with-áccêntš"
+      "www.example.com/with-áccêntš",
     );
   });
 
   it("does not strip harmless unicode characters", () => {
     expect(sanitizeUrl("www.example.com/лот.рфшишкиü–")).toBe(
-      "www.example.com/лот.рфшишкиü–"
+      "www.example.com/лот.рфшишкиü–",
     );
   });
 
   it("strips out ctrl chars", () => {
     expect(
-      sanitizeUrl("www.example.com/\u200D\u0000\u001F\x00\x1F\uFEFFfoo")
+      sanitizeUrl("www.example.com/\u200D\u0000\u001F\x00\x1F\uFEFFfoo"),
     ).toBe("www.example.com/foo");
   });
 
@@ -89,13 +89,13 @@ describe("sanitizeUrl", () => {
 
   it("removes whitespace from urls", () => {
     expect(sanitizeUrl("   http://example.com/path/to:something    ")).toBe(
-      "http://example.com/path/to:something"
+      "http://example.com/path/to:something",
     );
   });
 
   it("removes newline entities from urls", () => {
     expect(sanitizeUrl("https://example.com&NewLine;&NewLine;/something")).toBe(
-      "https://example.com/something"
+      "https://example.com/something",
     );
   });
 
@@ -122,8 +122,8 @@ describe("sanitizeUrl", () => {
     // this url is technically sanitized
     expect(
       sanitizeUrl(
-        "&#104;&#116;&#116;&#112;&#115;&#0000058//&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;/&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041"
-      )
+        "&#104;&#116;&#116;&#112;&#115;&#0000058//&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;/&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041",
+      ),
     ).toBe("https://example.com/javascript:alert('XSS')");
   });
 
@@ -173,28 +173,28 @@ describe("sanitizeUrl", () => {
     describe.each(["javascript", "data", "vbscript"])("%s", (protocol) => {
       it(`replaces ${protocol} urls with ${BLANK_URL}`, () => {
         expect(sanitizeUrl(`${protocol}:alert(document.domain)`)).toBe(
-          BLANK_URL
+          BLANK_URL,
         );
       });
 
       it(`allows ${protocol} urls that start with a letter prefix`, () => {
         expect(sanitizeUrl(`not_${protocol}:alert(document.domain)`)).toBe(
-          `not_${protocol}:alert(document.domain)`
+          `not_${protocol}:alert(document.domain)`,
         );
       });
 
       it(`disallows ${protocol} urls that start with non-\w characters as a suffix for the protocol`, () => {
         expect(sanitizeUrl(`&!*${protocol}:alert(document.domain)`)).toBe(
-          BLANK_URL
+          BLANK_URL,
         );
       });
 
       it(`disallows ${protocol} urls that use &colon; for the colon portion of the url`, () => {
         expect(sanitizeUrl(`${protocol}&colon;alert(document.domain)`)).toBe(
-          BLANK_URL
+          BLANK_URL,
         );
         expect(sanitizeUrl(`${protocol}&COLON;alert(document.domain)`)).toBe(
-          BLANK_URL
+          BLANK_URL,
         );
       });
 
@@ -211,7 +211,7 @@ describe("sanitizeUrl", () => {
           .join("");
 
         expect(
-          sanitizeUrl(`${mixedCapitalizationProtocol}:alert(document.domain)`)
+          sanitizeUrl(`${mixedCapitalizationProtocol}:alert(document.domain)`),
         ).toBe(BLANK_URL);
       });
 
@@ -231,29 +231,31 @@ describe("sanitizeUrl", () => {
         expect(
           sanitizeUrl(
             decodeURIComponent(
-              `${protocolWithControlCharacters}:alert(document.domain)`
-            )
-          )
+              `${protocolWithControlCharacters}:alert(document.domain)`,
+            ),
+          ),
         ).toBe(BLANK_URL);
       });
 
       it(`replaces ${protocol} urls with ${BLANK_URL} when url begins with %20`, () => {
         expect(
           sanitizeUrl(
-            decodeURIComponent(`%20%20%20%20${protocol}:alert(document.domain)`)
-          )
+            decodeURIComponent(
+              `%20%20%20%20${protocol}:alert(document.domain)`,
+            ),
+          ),
         ).toBe(BLANK_URL);
       });
 
       it(`replaces ${protocol} urls with ${BLANK_URL} when ${protocol} url begins with spaces`, () => {
         expect(sanitizeUrl(`    ${protocol}:alert(document.domain)`)).toBe(
-          BLANK_URL
+          BLANK_URL,
         );
       });
 
       it(`does not replace ${protocol}: if it is not in the scheme of the URL`, () => {
         expect(sanitizeUrl(`http://example.com#${protocol}:foo`)).toBe(
-          `http://example.com#${protocol}:foo`
+          `http://example.com#${protocol}:foo`,
         );
       });
     });
