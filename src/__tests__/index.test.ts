@@ -3,6 +3,32 @@ import { sanitizeUrl } from "..";
 import { BLANK_URL } from "../constants";
 
 describe("sanitizeUrl", () => {
+  describe("URL.canParse fallback", () => {
+    const originalCanParse = URL.canParse;
+
+    afterEach(() => {
+      // Restore URL.canParse after each test
+      URL.canParse = originalCanParse;
+    });
+
+    it("works when URL.canParse is not available", () => {
+      // @ts-expect-error - intentionally removing URL.canParse to test fallback
+      delete URL.canParse;
+
+      expect(sanitizeUrl("https://example.com")).toBe("https://example.com/");
+      expect(sanitizeUrl("http://example.com/path")).toBe(
+        "http://example.com/path",
+      );
+    });
+
+    it("returns BLANK_URL for invalid URLs when URL.canParse is not available", () => {
+      // @ts-expect-error - intentionally removing URL.canParse to test fallback
+      delete URL.canParse;
+
+      expect(sanitizeUrl("https://")).toBe(BLANK_URL);
+    });
+  });
+
   it("does not alter http URLs with alphanumeric characters", () => {
     expect(sanitizeUrl("http://example.com/path/to:something")).toBe(
       "http://example.com/path/to:something",
