@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## UNRELEASED
+## 7.1.2
 
 - Update dependencies
   - @types/jest to 30.0.0
@@ -12,6 +12,7 @@
   - typescript to 5.9.3
   - vitest to 4.0.16
 - Update Node to v24
+- Add @types/node 24.0.0
 
 ## 7.1.1
 
@@ -72,9 +73,8 @@
 
 ## 6.0.0
 
-**Breaking Changes**
-
-- Decode HTML characters automatically that would result in an XSS vulnerability when rendering links via a server rendered HTML file
+- BREAKING CHANGES
+  - Decode HTML characters automatically that would result in an XSS vulnerability when rendering links via a server rendered HTML file
 
 ```js
 // decodes to javacript:alert('XSS')
@@ -100,9 +100,8 @@ sanitizeUrl(okUrl); // 'https://example.com/javascript:alert('XSS');
 
 ## 5.0.0
 
-_Breaking Changes_
-
-- Sanitize vbscript urls (thanks @vicnicius)
+- BREAKING CHANGES
+  - Sanitize vbscript urls (thanks @vicnicius)
 
 ## 4.1.1
 
@@ -118,9 +117,8 @@ _Breaking Changes_
 
 ## 4.0.0
 
-_Breaking Changes_
-
-- Protocol-less urls (ie: www.example.com) will be sanitised and passed on instead of sending out `about:blank` (Thanks @chawes13 #18)
+- BREAKING CHANGES
+  - Protocol-less urls (ie: `www.example.com`) will be sanitised and passed on instead of sending out `about:blank` (Thanks @chawes13 #18)
 
 ## 3.1.0
 
@@ -128,10 +126,9 @@ _Breaking Changes_
 
 ## 3.0.0
 
-_breaking changes_
-
-- Replace blank strings with about:blank
-- Replace null values with about:blank
+- BREAKING CHANGES
+  - Replace blank strings with about:blank
+  - Replace null values with about:blank
 
 ## 2.1.0
 

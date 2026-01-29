@@ -26,6 +26,7 @@
   "homepage": "https://github.com/braintree/sanitize-url#readme",
   "devDependencies": {
     "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@vitest/coverage-v8": "^4.0.16",
     "chai": "^6.2.2",
