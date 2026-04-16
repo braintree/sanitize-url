@@ -9,6 +9,9 @@ on:
     branches:
       - "*"
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: "Unit Tests on Ubuntu"
