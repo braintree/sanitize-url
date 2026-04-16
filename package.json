@@ -12,7 +12,8 @@
     "lint": "eslint --ext js,ts .",
     "posttest": "npm run lint",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "eslint-config-braintree": "^6.0.0-typescript-prep-rc.2",
     "eslint-plugin-prettier": "^5.5.4",
     "happy-dom": "^20.0.11",
+    "husky": "^9.1.7",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3",
     "vitest": "^4.0.16"
