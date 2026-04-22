@@ -1,4 +1,4 @@
-name: "PR Validation"
+name: "PR Title Check"
 
 on:
   pull_request:
@@ -58,4 +58,3 @@ jobs:
             dev-deps
             other
           ignoreLabels: ignore-semantic-pull-request
-
